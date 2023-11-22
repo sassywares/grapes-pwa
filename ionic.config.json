@@ -1,0 +1,7 @@
+{
+  "name": "grapes-pwa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
