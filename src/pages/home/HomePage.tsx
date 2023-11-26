@@ -1,29 +1,23 @@
 import "./HomePage.css";
-import { useEffect, useRef, useState } from "react";
 import { useModal } from "@/components/modal";
+import { useEffect, useRef, useState } from "react";
 
 // Components
-import { SearchBar } from "@/components/search";
-import { ExploreContainer } from "@/components/ExploreContainer";
-import { HeaderSearchComponent } from "@/components/header/variants/HeaderSearchComponent";
 import {
   IonPage,
   IonModal,
   IonHeader,
   IonToolbar,
   IonContent,
-  IonItemGroup,
   IonGrid,
   IonRow,
   IonCol,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
   IonText,
-  IonCardSubtitle,
-  IonCardTitle,
 } from "@ionic/react";
+import { SearchBar } from "@/components/search";
+import { RecipeCard } from "@/recipe/components";
 import { Recipe, getPopularRecipes } from "@/recipe";
+import { HeaderSearchComponent } from "@/components/header/variants/HeaderSearchComponent";
 
 export const HomePage: React.FC = () => {
   const { ref, dismiss } = useModal();
@@ -39,6 +33,9 @@ export const HomePage: React.FC = () => {
    */
   const controlId = "searchBarControl";
 
+  /**
+   * Effect: Fetch popular recipes.
+   */
   useEffect(() => {
     setTimeout(() => {
       getPopularRecipes({
@@ -52,7 +49,7 @@ export const HomePage: React.FC = () => {
         },
       });
     }, 3000);
-  });
+  }, []);
 
   return (
     <IonPage>
@@ -74,7 +71,7 @@ export const HomePage: React.FC = () => {
         <section>
           <IonGrid>
             <IonRow className="ion-padding-horizontal">
-              <IonText>
+              <IonText className="prose prose-h2:text-white">
                 <h2>Popular Recipes</h2>
               </IonText>
             </IonRow>
@@ -85,21 +82,9 @@ export const HomePage: React.FC = () => {
                 </>
               ) : (
                 <>
-                  {recipes.map((recipe) => (
-                    <IonCol key={recipe.recipeId}>
-                      <IonCard>
-                        <img
-                          loading="lazy"
-                          src={recipe.image}
-                          alt={recipe.title}
-                        />
-                        <IonCardHeader>
-                          <IonCardSubtitle>
-                            {recipe.aggregateLikes} minutes
-                          </IonCardSubtitle>
-                          <IonCardTitle>{recipe.title}</IonCardTitle>
-                        </IonCardHeader>
-                      </IonCard>
+                  {recipes.map(({ recipeId, ...recipe }) => (
+                    <IonCol key={recipeId}>
+                      <RecipeCard {...recipe} recipeId={recipeId} />
                     </IonCol>
                   ))}
                 </>

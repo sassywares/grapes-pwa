@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import "./variables";
 @import "./mixins";
 
@@ -15,8 +19,36 @@
   }
 }
 
-h2 {
+*:focus {
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
+  font-weight: bold;
+}
+
+h4,
+h5,
+h6 {
+  @apply text-sm;
+}
+
+h3 {
+  @apply text-base md:text-lg xl:text-xl;
+}
+
+h2 {
+  @apply text-lg md:text-xl xl:text-2xl;
+}
+
+h1 {
+  @apply text-xl md:text-2xl xl:text-3xl;
 }
 
 section {
@@ -74,23 +106,39 @@ ion-col {
 /* Card */
 ion-card {
   display: flex;
-  flex-direction: column;
   gap: $size-xs;
+  position: relative;
+  flex-direction: column;
   padding-bottom: $size-xs;
+
+  a {
+    z-index: 1;
+  }
 
   @include when-sm {
     gap: $size;
     padding-bottom: $size;
   }
 
-  img {
+  &:focus-within {
+    outline: $outline-primary;
+  }
+
+  img,
+  ion-thumbnail {
     width: 100%;
-    object-fit: cover;
+    height: auto;
     aspect-ratio: 16 / 10;
 
     @include when-md {
       aspect-ratio: 16 / 9;
     }
+  }
+
+  img {
+    height: auto;
+    object-fit: cover;
+    position: relative;
   }
 
   ion-card-header,
@@ -103,6 +151,7 @@ ion-card {
     padding-inline: $size-xs !important;
 
     @include when-sm {
+      gap: $size-xs;
       padding-inline: $size !important;
     }
   }
@@ -111,4 +160,12 @@ ion-card {
     margin: 0;
     font-size: $size;
   }
+}
+
+// Badge
+ion-badge {
+  display: flex;
+  gap: $size-2xs;
+  align-items: center;
+  font-size: $size-sm;
 }
