@@ -1,0 +1,114 @@
+@import "./variables";
+@import "./mixins";
+
+:root {
+  /* Padding */
+  --ion-grid-column-padding: 0;
+  --ion-padding: #{$size};
+  --ion-card-margin: #{$size};
+  --ion-card-padding: #{$size};
+
+  @include when-sm {
+    --ion-padding: #{$size-md};
+    --ion-card-margin: #{$size-md};
+    --ion-card-padding: #{$size-md};
+  }
+}
+
+h2 {
+  margin: 0;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ion-padding);
+  padding-top: var(--ion-padding);
+  padding-bottom: var(--ion-padding);
+}
+
+/* Grid */
+ion-grid {
+  padding: 0;
+  gap: $size;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  @include when-sm {
+    gap: $size-md;
+  }
+}
+
+ion-row {
+  gap: $size;
+  padding-left: $size;
+
+  @include when-sm {
+    gap: $size-md;
+    padding-left: $size-md;
+  }
+}
+
+ion-col {
+  flex: auto !important;
+  width: calc(50% - #{$size}) !important;
+  max-width: calc(50% - #{$size}) !important;
+
+  @include when-sm {
+    width: calc(33.333% - #{$size-md}) !important;
+    max-width: calc(33.333% - #{$size-md}) !important;
+  }
+
+  @include when-md {
+    width: calc(25% - #{$size-md}) !important;
+    max-width: calc(25% - #{$size-md}) !important;
+  }
+
+  ion-card {
+    margin: 0;
+    height: 100%;
+  }
+}
+
+/* Card */
+ion-card {
+  display: flex;
+  flex-direction: column;
+  gap: $size-xs;
+  padding-bottom: $size-xs;
+
+  @include when-sm {
+    gap: $size;
+    padding-bottom: $size;
+  }
+
+  img {
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 16 / 10;
+
+    @include when-md {
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  ion-card-header,
+  ion-card-content {
+    display: flex;
+    gap: $size-2xs;
+    flex-direction: column;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-inline: $size-xs !important;
+
+    @include when-sm {
+      padding-inline: $size !important;
+    }
+  }
+
+  ion-card-title {
+    margin: 0;
+    font-size: $size;
+  }
+}

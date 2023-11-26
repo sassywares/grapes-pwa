@@ -1,0 +1,35 @@
+@mixin breakpoint($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin when-xs {
+  @include breakpoint($breakpoint-xs) {
+    @content;
+  }
+}
+
+@mixin when-sm {
+  @include breakpoint($breakpoint-sm) {
+    @content;
+  }
+}
+
+@mixin when-md {
+  @include breakpoint($breakpoint-md) {
+    @content;
+  }
+}
+
+@mixin when-lg {
+  @include breakpoint($breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin when-xl {
+  @include breakpoint($breakpoint-xl) {
+    @content;
+  }
+}

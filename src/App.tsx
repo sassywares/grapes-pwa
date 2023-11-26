@@ -17,6 +17,9 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 
+// The grapes theme
+import "./theme/grapes/main.scss";
+
 // Utils
 import { routes } from "./config";
 
@@ -29,11 +32,15 @@ import { IonApp, setupIonicReact, IonRouterOutlet } from "@ionic/react";
 import { HomePage } from "./pages/home";
 import { SearchPage } from "./pages/search";
 
-// setupIonicReact({
-//   mode: "ios",
-// });
+const mode = new URLSearchParams(window.location.search).get("mode");
 
-setupIonicReact();
+if (mode) {
+  setupIonicReact({
+    mode: mode as any,
+  });
+} else {
+  setupIonicReact();
+}
 
 const App: React.FC = () => (
   <IonApp>
