@@ -1,3 +1,4 @@
+import { log } from "@/utils";
 import { NO_INTERNET } from "@/config";
 import { Recipe } from "../recipeTypes";
 import { useEffect, useState } from "react";
@@ -26,20 +27,20 @@ export function PopularRecipesGridItems() {
     (() => {
       // No need to show cache if we are online.
       if (isOnline) {
-        console.log("We are online, no need to show cache.");
+        log("We are online, no need to show cache.");
         return null;
       }
 
       // Offline and not cached
       if (!areRecipesCached) {
         // Set error state.
-        console.log("We are offline and not cached.");
+        log("We are offline and not cached.");
         initialError = new Error(NO_INTERNET);
         return null;
       }
 
       // Offline and cached
-      console.log("We are offline and cached.");
+      log("We are offline and cached.");
       return probablyCachedRecipes.data;
     })()
   );
