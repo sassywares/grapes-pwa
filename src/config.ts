@@ -1,4 +1,6 @@
 export const APP_NAME = "Grape! 🍇";
+export const NO_INTERNET =
+  "You are offline, please connect to the internet to continue.";
 
 export const routes = {
   home: "/",

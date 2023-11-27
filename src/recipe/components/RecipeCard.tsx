@@ -1,5 +1,5 @@
 import { heart } from "ionicons/icons";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Components
 import {
@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import { routes } from "@/config";
 
 export function RecipeCard(recipe: Recipe) {
+  const recipeImgRef = useRef<HTMLImageElement>(null);
   const { image, title, recipeId, readyInMinutes, aggregateLikes } = recipe;
 
   // State: Loading state
@@ -33,8 +34,25 @@ export function RecipeCard(recipe: Recipe) {
     const img = new Image();
     img.src = image;
 
-    // When the image is loaded, set the loading state to false
-    img.onload = () => setIsLoading(false);
+    const handleLoad = () => setIsLoading(false);
+
+    const handleError = () => {
+      setIsLoading(false);
+
+      // Set the image to the fallback image
+      if (recipeImgRef.current) {
+        recipeImgRef.current.src = "/placeholder.jpg";
+      }
+    };
+
+    img.addEventListener("load", handleLoad);
+    img.addEventListener("error", handleError);
+
+    // Cleanup
+    return () => {
+      img.removeEventListener("load", handleLoad);
+      img.removeEventListener("error", handleError);
+    };
   }, []);
 
   return (
@@ -52,7 +70,7 @@ export function RecipeCard(recipe: Recipe) {
           <IonSkeletonText animated />
         </IonThumbnail>
       ) : (
-        <img alt={title} src={image} />
+        <img alt={title} src={image} ref={recipeImgRef} />
       )}
       <IonCardHeader>
         <div className="flex items-center justify-between">
