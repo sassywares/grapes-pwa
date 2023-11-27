@@ -14,14 +14,11 @@ import {
 } from "@ionic/react";
 import { Recipe } from "../recipeTypes";
 import { Link } from "react-router-dom";
+import { routes } from "@/config";
 
-export function RecipeCard({
-  image,
-  title,
-  recipeId,
-  readyInMinutes,
-  aggregateLikes,
-}: Recipe) {
+export function RecipeCard(recipe: Recipe) {
+  const { image, title, recipeId, readyInMinutes, aggregateLikes } = recipe;
+
   // State: Loading state
   // If there is an image, set the loading state to true
   const [isLoading, setIsLoading] = useState(!image);
@@ -44,8 +41,11 @@ export function RecipeCard({
     <IonCard className="ion-activatable">
       <Link
         title={title}
-        to={`/recipe/${recipeId}`}
         className="absolute top-0 left-0 w-full h-full"
+        to={{
+          state: recipe,
+          pathname: routes.getRecipe(recipeId),
+        }}
       />
       {isLoading ? (
         <IonThumbnail>

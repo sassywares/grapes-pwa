@@ -171,3 +171,10 @@ ion-badge {
   align-items: center;
   font-size: $size-sm;
 }
+
+// Searchbar
+ion-modal ion-searchbar {
+  @include when-md {
+    padding-top: $size-sm !important;
+  }
+}

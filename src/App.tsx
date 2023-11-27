@@ -30,7 +30,7 @@ import { IonApp, setupIonicReact, IonRouterOutlet } from "@ionic/react";
 
 // Pages
 import { HomePage } from "./pages/home";
-import { SearchPage } from "./pages/search";
+import { RecipePage } from "./pages/recipe";
 
 const mode = new URLSearchParams(window.location.search).get("mode");
 
@@ -46,17 +46,8 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        {/* <Route exact path="/tab1">
-          <Tab1 />
-        </Route>
-        <Route exact path="/tab2">
-          <Tab2 />
-        </Route>
-        <Route path="/tab3">
-          <Tab3 />
-        </Route> */}
-        <Route exact path={routes.search}>
-          <SearchPage />
+        <Route exact path={routes.recipe}>
+          <RecipePage />
         </Route>
         <Route exact path={routes.home}>
           <HomePage />

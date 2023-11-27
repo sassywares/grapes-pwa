@@ -36,3 +36,7 @@ export type Recipe = {
 
 export type RecipePayload = Payload<Recipe, "object">;
 export type RecipesPayload = Payload<Recipe[], "array">;
+
+export function isRecipe(object: any): object is Recipe {
+  return object && "recipeId" in object;
+}
