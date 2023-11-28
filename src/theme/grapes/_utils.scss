@@ -3,8 +3,32 @@
     @apply p-base sm:p-md md:p-lg;
   }
 
+  .px-content {
+    @apply px-base sm:px-md md:px-lg;
+  }
+
+  .pt-content {
+    @apply pt-base sm:pt-md md:pt-lg;
+  }
+
   .gap-content {
     @apply gap-sm sm:gap-base md:gap-md;
+  }
+
+  .top-content {
+    @apply top-base sm:top-md md:top-lg;
+  }
+
+  .right-content {
+    @apply right-base sm:right-md md:right-lg;
+  }
+
+  .bottom-content {
+    @apply bottom-base sm:bottom-md md:bottom-lg;
+  }
+
+  .left-content {
+    @apply left-base sm:left-md md:left-lg;
   }
 
   .text-secondary {

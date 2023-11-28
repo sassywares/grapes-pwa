@@ -1,7 +1,9 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, PropsWithChildren } from "react";
 import { IonThumbnail, IonSkeletonText } from "@ionic/react";
 
-export function RecipeImage({ src, alt }: { src?: string; alt?: string }) {
+type Props = PropsWithChildren<{ src?: string; alt?: string }>;
+
+export function RecipeImage({ src, alt, children }: Props) {
   const imgRef = useRef<HTMLImageElement>(null);
 
   // State: Loading state
@@ -39,11 +41,16 @@ export function RecipeImage({ src, alt }: { src?: string; alt?: string }) {
     };
   }, []);
 
-  return isLoading ? (
-    <IonThumbnail>
-      <IonSkeletonText animated />
-    </IonThumbnail>
-  ) : (
-    <img alt={alt} src={src} ref={imgRef} />
+  return (
+    <div className="recipe-image">
+      {isLoading ? (
+        <IonThumbnail>
+          <IonSkeletonText animated />
+        </IonThumbnail>
+      ) : (
+        <img alt={alt} src={src} ref={imgRef} />
+      )}
+      {children}
+    </div>
   );
 }

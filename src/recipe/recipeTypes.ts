@@ -54,6 +54,28 @@ export type Nutrient = {
     }
 );
 
+export type RecipeIngredient = {
+  name: string;
+  image: string;
+  localizedName: string;
+};
+
+export type RecipeEquipment = RecipeIngredient;
+
+export type RecipeStep = {
+  number: number;
+  step: TrustedHTML;
+  equipment: RecipeEquipment[];
+  ingredients: RecipeIngredient[];
+};
+
+export type RecipeInstruction = {
+  name: string;
+  steps: RecipeStep[];
+};
+
+export type AnalyzedInstructions = RecipeInstruction[] | null;
+
 export type RecipePayload = Payload<Recipe, "object">;
 export type RecipesPayload = Payload<Recipe[], "array">;
 

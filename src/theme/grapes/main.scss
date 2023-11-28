@@ -60,6 +60,20 @@ section {
   padding-bottom: var(--ion-padding);
 }
 
+ion-list-header,
+ion-item-divider,
+ion-item::part(native) {
+  padding-inline: $size;
+
+  @include when-sm {
+    padding-inline: $size-md;
+  }
+
+  @include when-lg {
+    padding-inline: $size-lg;
+  }
+}
+
 /* Grid */
 ion-grid {
   padding: 0;
@@ -152,14 +166,17 @@ ion-card {
 ion-badge {
   display: flex;
   gap: $size-2xs;
+  flex-shrink: 0;
   align-items: center;
   font-size: $size-sm;
 }
 
 // Chip
 ion-chip {
+  margin: 0;
   display: flex;
   gap: $size-xs;
+  flex-shrink: 0;
   align-items: center;
   font-size: $size-sm;
   padding-left: $size-2xs;
@@ -174,22 +191,27 @@ ion-modal ion-searchbar {
 
 // Recipe
 .recipe {
+  position: relative;
+
   // Image
-  img,
-  ion-thumbnail {
-    width: 100%;
-    height: auto;
+  .recipe-image {
+    position: relative;
     aspect-ratio: 16 / 10;
 
     @include when-md {
       aspect-ratio: 16 / 9;
     }
-  }
 
-  img {
-    height: auto;
-    object-fit: cover;
-    position: relative;
+    img,
+    ion-thumbnail {
+      width: 100%;
+      height: 100%;
+    }
+
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
   }
 }
 

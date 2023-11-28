@@ -11,9 +11,11 @@ import {
 export function SkeletonRecipeCard() {
   return (
     <IonCard aria-label="Loading" className="recipe">
-      <IonThumbnail aria-hidden="true">
-        <IonSkeletonText animated />
-      </IonThumbnail>
+      <div className="recipe-image">
+        <IonThumbnail aria-hidden="true">
+          <IonSkeletonText animated />
+        </IonThumbnail>
+      </div>
       <IonCardHeader aria-hidden="true">
         <div className="flex items-center justify-between">
           <IonCardSubtitle>
@@ -25,6 +27,7 @@ export function SkeletonRecipeCard() {
         </div>
         <IonCardTitle>
           <IonSkeletonText animated style={{ width: "80%" }} />
+          <IonSkeletonText animated style={{ width: "60%" }} />
         </IonCardTitle>
       </IonCardHeader>
     </IonCard>
