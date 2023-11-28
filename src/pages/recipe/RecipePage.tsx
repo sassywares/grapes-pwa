@@ -1,8 +1,8 @@
 import { FC } from "react";
 import { routes } from "@/config";
-import { Recipe, getRecipeById, isRecipe } from "@/recipe";
 import { IonPage } from "@ionic/react";
 import { useEffect, useState } from "react";
+import { Recipe, getRecipeById, isRecipe } from "@/recipe";
 import { Redirect, useHistory, useParams } from "react-router";
 
 type Params = {

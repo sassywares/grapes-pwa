@@ -1,11 +1,11 @@
-import { log } from "@/utils";
+import { useState } from "react";
 import { NO_INTERNET } from "@/config";
-import { Recipe } from "../recipeTypes";
-import { useEffect, useState } from "react";
-import { useIsOnline } from "@/hooks/useIsOnline";
+import { useIsOnline, usePayloadData } from "@/hooks";
+import { isValidArray, isValidObject, log } from "@/utils";
 import { getCachedPopularRecipes, getPopularRecipes } from "../recipeApi";
 
 // Components
+import { Recipe } from "../recipeTypes";
 import { RecipeCard } from "./RecipeCard";
 import { SkeletonRecipeCard } from "./SkeletonRecipeCard";
 import { IonGrid, IonRow, IonText, IonCol } from "@ionic/react";
@@ -13,14 +13,15 @@ import { IonGrid, IonRow, IonText, IonCol } from "@ionic/react";
 export function PopularRecipesGridItems() {
   const isOnline = useIsOnline();
 
+  /**
+   * Initially, there is no error
+   */
   let initialError: Error | null = null;
 
-  // Get potential cached popular recipes.
-  const probablyCachedRecipes = getCachedPopularRecipes();
-
-  // Check if the recipes are cached.
-  const areRecipesCached =
-    probablyCachedRecipes && probablyCachedRecipes.data.length > 0;
+  /**
+   * The cached recipes, might be null.
+   */
+  const probablyCachedData = getCachedPopularRecipes();
 
   // State
   const [recipes, setRecipes] = useState<Recipe[] | null>(
@@ -32,7 +33,7 @@ export function PopularRecipesGridItems() {
       }
 
       // Offline and not cached
-      if (!areRecipesCached) {
+      if (!isValidObject(probablyCachedData)) {
         // Set error state.
         log("We are offline and not cached.");
         initialError = new Error(NO_INTERNET);
@@ -41,57 +42,19 @@ export function PopularRecipesGridItems() {
 
       // Offline and cached
       log("We are offline and cached.");
-      return probablyCachedRecipes.data;
+      return probablyCachedData.data;
     })()
   );
 
-  /**
-   * Recipes are valid if they are an array.
-   */
-  const areRecipesValid = recipes !== null && Array.isArray(recipes);
+  // Get payload data.
+  const { error, isLoading } = usePayloadData<Recipe[], "array">({
+    initialError,
+    setData: setRecipes,
+    getData: getPopularRecipes,
+    isDataValid: isValidArray(recipes),
+  });
 
-  /**
-   * Error state.
-   * If there is an error, I gotta show it.
-   */
-  const [error, setError] = useState(initialError);
-
-  /**
-   * Loading state.
-   * If there are no recipes and no error, we are loading.
-   */
-  const isLoading = !areRecipesValid && !error;
-
-  /**
-   * Effect: Fetch popular recipes.
-   */
-  useEffect(() => {
-    // We fetch only when we're online.
-    if (!isOnline) {
-      return;
-    }
-
-    // In case we're not loading,
-    // Which is the case when we have either recipes or an error.
-    if (!isLoading) {
-      // Clear both to initiate loading.
-      setError(null);
-      setRecipes(null);
-    }
-
-    setTimeout(() => {
-      getPopularRecipes({
-        onError: ({ message }) => {
-          setRecipes(null);
-          setError(new Error(message));
-        },
-        onSuccess: ({ data }) => {
-          setError(null);
-          setRecipes(data);
-        },
-      });
-    }, 3000);
-  }, [isOnline]);
+  console.log({ recipes, error, isLoading });
 
   /**
    * Possible cases.
