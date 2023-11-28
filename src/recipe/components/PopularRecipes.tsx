@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NO_INTERNET } from "@/config";
 import { useIsOnline, usePayloadData } from "@/hooks";
 import { isValidArray, isValidObject, log } from "@/utils";
@@ -47,14 +47,28 @@ export function PopularRecipesGridItems() {
   );
 
   // Get payload data.
-  const { error, isLoading } = usePayloadData<Recipe[], "array">({
+  const { error, isLoading, getPayloadData } = usePayloadData<
+    Recipe[],
+    "array"
+  >({
     initialError,
     setData: setRecipes,
     getData: getPopularRecipes,
     isDataValid: isValidArray(recipes),
   });
 
-  console.log({ recipes, error, isLoading });
+  /**
+   * Effect: Fetch popular recipes.
+   */
+  useEffect(() => {
+    // We fetch only when we're online.
+    if (!isOnline) {
+      return;
+    }
+
+    // Get payload data.
+    getPayloadData();
+  }, [isOnline]);
 
   /**
    * Possible cases.

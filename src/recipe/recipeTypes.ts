@@ -1,4 +1,4 @@
-import { HTML, NumericBoolean, Payload } from "@/types";
+import { NumericBoolean, Payload } from "@/types";
 
 export type Recipe = {
   aggregateLikes?: number;
@@ -24,7 +24,7 @@ export type Recipe = {
   recipeId: number;
   servings?: number;
   sourceUrl?: string;
-  summary?: HTML;
+  summary?: TrustedHTML;
   sustainable?: NumericBoolean;
   title: string;
   vegan?: NumericBoolean;

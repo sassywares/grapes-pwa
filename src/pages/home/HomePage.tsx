@@ -1,47 +1,12 @@
 import "./HomePage.css";
-import { useRef } from "react";
-import { useModal } from "@/components/modal";
-
-// Components
-import {
-  IonPage,
-  IonModal,
-  IonHeader,
-  IonToolbar,
-  IonContent,
-} from "@ionic/react";
-import { SearchBar } from "@/components/search";
+import { PageWithSearch } from "@/components";
 import { PopularRecipes } from "@/recipe/components";
-import { HeaderSearchComponent } from "@/components/header/variants/HeaderSearchComponent";
 
 export const HomePage: React.FC = () => {
-  const { ref, dismiss } = useModal();
-  const searchBarRef = useRef<HTMLIonSearchbarElement>(null);
-
-  /**
-   * This is the ID of the search button in the header.
-   */
-  const controlId = "searchBarControl";
-
   return (
-    <IonPage>
-      <HeaderSearchComponent searchButtonId={controlId} />
-      <IonContent fullscreen>
-        {/* Search Modal */}
-        <IonModal
-          ref={ref}
-          trigger={controlId}
-          onIonModalDidPresent={() => searchBarRef.current?.setFocus()}
-        >
-          <IonHeader>
-            <IonToolbar>
-              <SearchBar autoFocus onClickCancel={dismiss} ref={searchBarRef} />
-            </IonToolbar>
-          </IonHeader>
-        </IonModal>
-        {/* Popular Recipes */}
-        <PopularRecipes />
-      </IonContent>
-    </IonPage>
+    <PageWithSearch>
+      {/* Popular Recipes */}
+      <PopularRecipes />
+    </PageWithSearch>
   );
 };

@@ -1,5 +1,4 @@
-import { useIsOnline } from "@/hooks";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Boolbacks, Payload } from "@/types";
 
 type Props<Data, Type> = {
@@ -32,8 +31,6 @@ export function usePayloadData<Data, Type>({
   isDataValid,
   initialError = null,
 }: Props<Data, Type>) {
-  const isOnline = useIsOnline();
-
   /**
    * Error state.
    * If there is an error, I gotta show it.
@@ -47,14 +44,10 @@ export function usePayloadData<Data, Type>({
   const isLoading = !isDataValid && !error;
 
   /**
-   * Effect: Fetch popular recipes.
+   * Get the payload and set the data.
+   * Call this function whenever you want to fetch the data.
    */
-  useEffect(() => {
-    // We fetch only when we're online.
-    if (!isOnline) {
-      return;
-    }
-
+  function getPayloadData() {
     // In case we're not loading,
     // Which is the case when we have either recipes or an error.
     if (!isLoading) {
@@ -75,10 +68,12 @@ export function usePayloadData<Data, Type>({
         },
       });
     }, 3000);
-  }, [isOnline]);
+  }
 
   return {
     error,
+    setError,
     isLoading,
+    getPayloadData,
   };
 }

@@ -126,23 +126,6 @@ ion-card {
     outline: $outline-primary;
   }
 
-  img,
-  ion-thumbnail {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 10;
-
-    @include when-md {
-      aspect-ratio: 16 / 9;
-    }
-  }
-
-  img {
-    height: auto;
-    object-fit: cover;
-    position: relative;
-  }
-
   ion-card-header,
   ion-card-content {
     display: flex;
@@ -176,5 +159,26 @@ ion-badge {
 ion-modal ion-searchbar {
   @include when-md {
     padding-top: $size-sm !important;
+  }
+}
+
+// Recipe
+.recipe {
+  // Image
+  img,
+  ion-thumbnail {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+
+    @include when-md {
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  img {
+    height: auto;
+    object-fit: cover;
+    position: relative;
   }
 }

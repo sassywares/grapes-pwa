@@ -1,18 +1,24 @@
-import { IonTitle, IonHeader, IonToolbar } from "@ionic/react";
-import { PropsWithChildren } from "react";
 import { APP_NAME } from "@/config";
+import { PropsWithChildren, ReactNode } from "react";
+import { IonTitle, IonHeader, IonToolbar } from "@ionic/react";
 
 type Props = PropsWithChildren<{
-  leftSlot?: React.ReactNode;
-  rightSlot?: React.ReactNode;
+  title?: ReactNode;
+  leftSlot?: ReactNode;
+  rightSlot?: ReactNode;
 }>;
 
-export function HeaderComponent({ children, leftSlot, rightSlot }: Props) {
+export function HeaderComponent({
+  children,
+  leftSlot,
+  rightSlot,
+  title = APP_NAME,
+}: Props) {
   return (
     <IonHeader>
       <IonToolbar>
         {leftSlot}
-        <IonTitle>{APP_NAME}</IonTitle>
+        <IonTitle>{title}</IonTitle>
         {rightSlot}
       </IonToolbar>
       {children}

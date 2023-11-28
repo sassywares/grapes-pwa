@@ -1,5 +1,4 @@
 import { heart } from "ionicons/icons";
-import { useEffect, useRef, useState } from "react";
 
 // Components
 import {
@@ -9,54 +8,17 @@ import {
   IonCardSubtitle,
   IonCardTitle,
   IonIcon,
-  IonSkeletonText,
-  IonThumbnail,
 } from "@ionic/react";
 import { Recipe } from "../recipeTypes";
 import { Link } from "react-router-dom";
 import { routes } from "@/config";
+import { RecipeImage } from "./RecipeImage";
 
 export function RecipeCard(recipe: Recipe) {
-  const recipeImgRef = useRef<HTMLImageElement>(null);
   const { image, title, recipeId, readyInMinutes, aggregateLikes } = recipe;
 
-  // State: Loading state
-  // If there is an image, set the loading state to true
-  const [isLoading, setIsLoading] = useState(!image);
-
-  /**
-   * Effect: Lazy load image
-   */
-  useEffect(() => {
-    if (!image) return;
-
-    // Create a new image and set the source to the image url
-    const img = new Image();
-    img.src = image;
-
-    const handleLoad = () => setIsLoading(false);
-
-    const handleError = () => {
-      setIsLoading(false);
-
-      // Set the image to the fallback image
-      if (recipeImgRef.current) {
-        recipeImgRef.current.src = "/placeholder.jpg";
-      }
-    };
-
-    img.addEventListener("load", handleLoad);
-    img.addEventListener("error", handleError);
-
-    // Cleanup
-    return () => {
-      img.removeEventListener("load", handleLoad);
-      img.removeEventListener("error", handleError);
-    };
-  }, []);
-
   return (
-    <IonCard className="ion-activatable">
+    <IonCard className="ion-activatable recipe">
       <Link
         title={title}
         className="absolute top-0 left-0 w-full h-full"
@@ -65,13 +27,7 @@ export function RecipeCard(recipe: Recipe) {
           pathname: routes.getRecipe(recipeId),
         }}
       />
-      {isLoading ? (
-        <IonThumbnail>
-          <IonSkeletonText animated />
-        </IonThumbnail>
-      ) : (
-        <img alt={title} src={image} ref={recipeImgRef} />
-      )}
+      <RecipeImage src={image} alt={title} />
       <IonCardHeader>
         <div className="flex items-center justify-between">
           <IonCardSubtitle>{readyInMinutes} min</IonCardSubtitle>

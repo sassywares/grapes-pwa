@@ -10,7 +10,7 @@ import {
 
 export function SkeletonRecipeCard() {
   return (
-    <IonCard aria-label="Loading">
+    <IonCard aria-label="Loading" className="recipe">
       <IonThumbnail aria-hidden="true">
         <IonSkeletonText animated />
       </IonThumbnail>
