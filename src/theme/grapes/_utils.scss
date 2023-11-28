@@ -1,0 +1,13 @@
+@layer utilities {
+  .p-content {
+    @apply p-base sm:p-md md:p-lg;
+  }
+
+  .gap-content {
+    @apply gap-sm sm:gap-base md:gap-md;
+  }
+
+  .text-secondary {
+    @apply text-gray-400;
+  }
+}

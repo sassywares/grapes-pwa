@@ -4,6 +4,7 @@
 
 @import "./variables";
 @import "./mixins";
+@import "./utils";
 
 :root {
   /* Padding */
@@ -155,6 +156,15 @@ ion-badge {
   font-size: $size-sm;
 }
 
+// Chip
+ion-chip {
+  display: flex;
+  gap: $size-xs;
+  align-items: center;
+  font-size: $size-sm;
+  padding-left: $size-2xs;
+}
+
 // Searchbar
 ion-modal ion-searchbar {
   @include when-md {
@@ -181,4 +191,12 @@ ion-modal ion-searchbar {
     object-fit: cover;
     position: relative;
   }
+}
+
+// Page Content
+ion-content.page-content {
+  --padding-top: #{$size};
+  --padding-end: #{$size};
+  --padding-bottom: #{$size};
+  --padding-start: #{$size};
 }

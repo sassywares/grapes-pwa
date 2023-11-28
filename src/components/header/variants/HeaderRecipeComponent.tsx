@@ -1,28 +1,39 @@
+import { log } from "@/utils";
 import { useState } from "react";
 import { routes } from "@/config";
 import { heart } from "ionicons/icons";
+import {
+  Recipe,
+  isRecipeLiked,
+  cacheRecipeLike,
+  cacheRecipeDislike,
+} from "@/recipe";
 
 // Components
-import { Recipe } from "@/recipe";
 import { HeaderComponent } from "../HeaderComponent";
 import { IonIcon, IonButton, IonButtons, IonBackButton } from "@ionic/react";
 
-type Props = Pick<Recipe, "recipeId" | "title">;
+export function HeaderRecipeComponent(recipe: Recipe) {
+  const { recipeId } = recipe;
 
-export function HeaderRecipeComponent({ title, recipeId }: Props) {
-  const [isLiked, setIsLiked] = useState<boolean>(false);
+  // We don't have an auth system right now, so a recipe's like is stored in cache.
+  const [isLiked, setIsLiked] = useState<boolean>(isRecipeLiked(recipeId));
+
+  log("HeaderRecipeComponent", { recipe, isLiked });
 
   const onClickLikeListener = () => {
     setIsLiked(true);
+    cacheRecipeLike(recipe);
   };
 
   const onClickDislikeListener = () => {
     setIsLiked(false);
+    cacheRecipeDislike(recipe);
   };
 
   return (
     <HeaderComponent
-      title=""
+      title="Recipe"
       leftSlot={
         <IonButtons slot="start">
           <IonBackButton defaultHref={routes.home} />

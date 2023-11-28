@@ -1,5 +1,7 @@
 import { NumericBoolean, Payload } from "@/types";
 
+export type JSON = string;
+
 export type Recipe = {
   aggregateLikes?: number;
   analyzedInstructions?: JSON;
@@ -14,6 +16,7 @@ export type Recipe = {
   healthScore?: number;
   image?: string;
   imageType?: string;
+  isLiked?: boolean;
   license?: any;
   lowFodmap?: NumericBoolean;
   nutrients?: JSON;
@@ -33,6 +36,23 @@ export type Recipe = {
   veryPopular?: NumericBoolean;
   weightWatcherSmartPoints?: number;
 };
+
+export type Nutrient = {
+  amount: number;
+} & (
+  | {
+      unit: "kcal";
+      name: "Calories";
+    }
+  | {
+      unit: "g";
+      name: "Protein";
+    }
+  | {
+      unit: "g";
+      name: "Carbohydrates";
+    }
+);
 
 export type RecipePayload = Payload<Recipe, "object">;
 export type RecipesPayload = Payload<Recipe[], "array">;

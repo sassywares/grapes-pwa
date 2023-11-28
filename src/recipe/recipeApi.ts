@@ -1,7 +1,23 @@
 import { Boolbacks, Response } from "@/types";
-import { RecipePayload, RecipesPayload } from "./recipeTypes";
+import { Recipe, RecipePayload, RecipesPayload } from "./recipeTypes";
 
 const defaultError = { message: "Something went wrong" };
+
+export function isRecipeLiked(id: Recipe["recipeId"]): boolean {
+  const recipe = getCachedRecipe(id);
+
+  if (!recipe || !recipe.isLiked) return false;
+
+  return recipe.isLiked;
+}
+
+export function cacheRecipeLike(recipe: Recipe) {
+  cacheRecipe({ ...recipe, isLiked: true });
+}
+
+export function cacheRecipeDislike(recipe: Recipe) {
+  cacheRecipe({ ...recipe, isLiked: false });
+}
 
 /**
  * Caches the popular recipes in the local storage
@@ -27,18 +43,15 @@ export function getCachedPopularRecipes(): RecipesPayload | null {
  * Caches a recipe in the local storage
  * Useful for when the user is offline
  */
-export function cacheRecipe(recipe: RecipePayload) {
-  localStorage.setItem(
-    `recipe-${recipe.data.recipeId}`,
-    JSON.stringify(recipe)
-  );
+export function cacheRecipe(recipe: Recipe) {
+  localStorage.setItem(`recipe-${recipe.recipeId}`, JSON.stringify(recipe));
 }
 
 /**
  * Gets a cached recipe
  * @param {string | number} id The id of the recipe to get
  */
-export function getCachedRecipe(id: string | number): RecipePayload | null {
+export function getCachedRecipe(id: string | number): Recipe | null {
   const cached = localStorage.getItem(`recipe-${id}`);
 
   if (!cached) return null;

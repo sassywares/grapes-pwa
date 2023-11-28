@@ -1,5 +1,4 @@
-import { FC } from "react";
-import { IonContent, IonPage } from "@ionic/react";
+import { IonPage } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { isValidObject, log } from "@/utils";
 import { NO_INTERNET, routes } from "@/config";
@@ -8,11 +7,9 @@ import { Recipe, getRecipeById, isRecipe } from "@/recipe";
 import { RecipeDetailComponent } from "@/recipe/components";
 import { Redirect, useHistory, useParams } from "react-router";
 import {
-  HeaderLoadingComponent,
   HeaderRecipeComponent,
-  HeaderSearchComponent,
+  HeaderLoadingComponent,
 } from "@/components/header/variants";
-import { PageWithSearch } from "@/components";
 
 type Params = {
   /**
@@ -69,7 +66,7 @@ export function RecipePage() {
     getData: (boolbacks) => getRecipeById(recipeId, boolbacks),
   });
 
-  log({ recipe, selectedRecipe, recipeId, error, isLoading });
+  log("RecipePage", { recipe, selectedRecipe, recipeId, error, isLoading });
 
   /**
    * Effect: Fetch the recipe if it isn't already in state.
@@ -116,10 +113,7 @@ export function RecipePage() {
     <IonPage>
       {/* Bang! since loading stops whenever recipe or error is found, */}
       {/* And since error returns above, we got recipe for sure! */}
-      <HeaderRecipeComponent
-        title={recipe!.title}
-        recipeId={recipe!.recipeId}
-      />
+      <HeaderRecipeComponent {...recipe!} />
       <RecipeDetailComponent {...recipe!} />
     </IonPage>
   );
