@@ -2,14 +2,15 @@ import { IonPage } from "@ionic/react";
 import { useEffect, useState } from "react";
 import { isValidObject, log } from "@/utils";
 import { NO_INTERNET, routes } from "@/config";
+import { RecipeDetail, SkeletonRecipeDetail } from "@/recipe/components";
 import { useIsOnline, usePayloadData } from "@/hooks";
 import { Recipe, getRecipeById, isRecipe } from "@/recipe";
-import { RecipeDetailComponent } from "@/recipe/components";
 import { Redirect, useHistory, useParams } from "react-router";
 import {
   HeaderRecipeComponent,
   HeaderLoadingComponent,
 } from "@/components/header/variants";
+import { PageWithError } from "@/components";
 
 type Params = {
   /**
@@ -99,22 +100,18 @@ export function RecipePage() {
     return (
       <IonPage>
         <HeaderLoadingComponent />
+        <SkeletonRecipeDetail />
       </IonPage>
     );
 
-  if (error)
-    return (
-      <IonPage>
-        <div>{error.message}</div>
-      </IonPage>
-    );
+  if (error) return <PageWithError error={error} />;
 
   return (
     <IonPage>
       {/* Bang! since loading stops whenever recipe or error is found, */}
       {/* And since error returns above, we got recipe for sure! */}
       <HeaderRecipeComponent {...recipe!} />
-      <RecipeDetailComponent {...recipe!} />
+      <RecipeDetail {...recipe!} />
     </IonPage>
   );
 }

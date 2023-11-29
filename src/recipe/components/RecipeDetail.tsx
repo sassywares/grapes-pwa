@@ -34,7 +34,7 @@ import {
 } from "@ionic/react";
 import { RecipeImage } from "./RecipeImage";
 
-export function RecipeDetailComponent(recipe: Recipe) {
+export function RecipeDetail(recipe: Recipe) {
   const {
     aggregateLikes,
     analyzedInstructions,
