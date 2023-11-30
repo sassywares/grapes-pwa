@@ -1,10 +1,12 @@
-import { useRef } from "react";
+import { useState } from "react";
 
 export function useModal() {
-  const ref = useRef<HTMLIonModalElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   return {
-    ref,
-    dismiss: () => ref.current?.dismiss(),
+    isOpen,
+    open: () => setIsOpen(true),
+    dismiss: () => setIsOpen(false),
+    toggle: () => setIsOpen(!isOpen),
   };
 }

@@ -22,6 +22,7 @@
 
 *:focus {
   outline: none;
+  scroll-behavior: smooth;
 }
 
 h1,
@@ -52,12 +53,41 @@ h1 {
   @apply text-xl md:text-2xl xl:text-3xl;
 }
 
+// Main header
+// Main header has a tricky way of adding a container to the header.
+// This is a workaround to make sure the container is there.
+@include when-lg {
+  ion-header {
+    margin-inline: auto;
+    padding-top: $size-2xl;
+    max-width: $breakpoint-lg;
+
+    &.md ion-toolbar {
+      border-radius: $size-xs;
+    }
+  }
+}
+
+// Container
+.container {
+  margin-inline: auto;
+  max-width: $breakpoint-lg;
+}
+
+// Section
 section {
   display: flex;
   flex-direction: column;
   gap: var(--ion-padding);
   padding-top: var(--ion-padding);
   padding-bottom: var(--ion-padding);
+}
+
+ion-card,
+ion-button::part(native) {
+  &:focus-within {
+    outline: $outline-primary;
+  }
 }
 
 ion-list-header,
@@ -137,10 +167,6 @@ ion-card {
     padding-bottom: $size;
   }
 
-  &:focus-within {
-    outline: $outline-primary;
-  }
-
   ion-card-header,
   ion-card-content {
     display: flex;
@@ -183,7 +209,7 @@ ion-chip {
 }
 
 // Searchbar
-ion-modal ion-searchbar {
+ion-modal ion-searchbar.ios {
   @include when-md {
     padding-top: $size-sm !important;
   }

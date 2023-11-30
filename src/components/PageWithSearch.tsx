@@ -12,23 +12,22 @@ import {
   IonToolbar,
 } from "@ionic/react";
 
-export function PageWithSearch({ children }: { children: ReactNode }) {
-  const { ref, dismiss } = useModal();
-  const searchBarRef = useRef<HTMLIonSearchbarElement>(null);
+type Props = {
+  children: ReactNode | ((params: ReturnType<typeof useModal>) => ReactNode);
+};
 
-  /**
-   * This is the ID of the search button in the header.
-   */
-  const controlId = "searchBarControl";
+export function PageWithSearch({ children }: Props) {
+  const modalProps = useModal();
+  const { isOpen, open, dismiss } = modalProps;
+  const searchBarRef = useRef<HTMLIonSearchbarElement>(null);
 
   return (
     <IonPage>
-      <HeaderSearchComponent searchButtonId={controlId} />
+      <HeaderSearchComponent onClickSearchButton={open} />
       <IonContent fullscreen>
         {/* Search Modal */}
         <IonModal
-          ref={ref}
-          trigger={controlId}
+          isOpen={isOpen}
           onIonModalDidPresent={() => searchBarRef.current?.setFocus()}
         >
           <IonHeader>
@@ -37,7 +36,7 @@ export function PageWithSearch({ children }: { children: ReactNode }) {
             </IonToolbar>
           </IonHeader>
         </IonModal>
-        {children}
+        {typeof children !== "function" ? children : children(modalProps)}
       </IonContent>
     </IonPage>
   );

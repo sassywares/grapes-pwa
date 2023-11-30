@@ -89,10 +89,10 @@ export function PopularRecipesGridItems() {
   // 2. Error
   if (error) {
     return (
-      <IonCol>
-        <IonText className="prose prose-h3:text-white">
-          <p>{error.message}</p>
-        </IonText>
+      <IonCol className="!w-full !max-w-full">
+        <p role="alert" className="text-center">
+          {error.message}
+        </p>
       </IonCol>
     );
   }
@@ -106,7 +106,7 @@ export function PopularRecipesGridItems() {
 
 export function PopularRecipes() {
   return (
-    <section>
+    <section id="popularRecipes" className="container">
       <IonGrid>
         <IonRow className="ion-padding-horizontal">
           <IonText className="prose prose-h2:text-white">
