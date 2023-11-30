@@ -15,7 +15,7 @@ export function HeaderComponent({
   title = APP_NAME,
 }: Props) {
   return (
-    <IonHeader>
+    <IonHeader className="app-header">
       <IonToolbar>
         {leftSlot}
         <IonTitle>{title}</IonTitle>

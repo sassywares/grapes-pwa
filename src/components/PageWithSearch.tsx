@@ -11,6 +11,7 @@ import {
   IonHeader,
   IonToolbar,
 } from "@ionic/react";
+import { log } from "@/utils";
 
 type Props = {
   children: ReactNode | ((params: ReturnType<typeof useModal>) => ReactNode);
@@ -19,6 +20,9 @@ type Props = {
 export function PageWithSearch({ children }: Props) {
   const modalProps = useModal();
   const { isOpen, open, dismiss } = modalProps;
+
+  log("PageWithSearch", { isOpen });
+
   const searchBarRef = useRef<HTMLIonSearchbarElement>(null);
 
   return (
@@ -28,6 +32,7 @@ export function PageWithSearch({ children }: Props) {
         {/* Search Modal */}
         <IonModal
           isOpen={isOpen}
+          onIonModalDidDismiss={dismiss}
           onIonModalDidPresent={() => searchBarRef.current?.setFocus()}
         >
           <IonHeader>

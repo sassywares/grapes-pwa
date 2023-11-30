@@ -7,6 +7,6 @@ export function useModal() {
     isOpen,
     open: () => setIsOpen(true),
     dismiss: () => setIsOpen(false),
-    toggle: () => setIsOpen(!isOpen),
+    toggle: (isOpen: boolean) => setIsOpen(!isOpen),
   };
 }

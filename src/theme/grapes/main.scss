@@ -57,13 +57,22 @@ h1 {
 // Main header has a tricky way of adding a container to the header.
 // This is a workaround to make sure the container is there.
 @include when-lg {
-  ion-header {
+  ion-header.app-header {
     margin-inline: auto;
-    padding-top: $size-2xl;
     max-width: $breakpoint-lg;
 
-    &.md ion-toolbar {
-      border-radius: $size-xs;
+    &.md {
+      padding-top: $size-2xl;
+
+      ion-toolbar {
+        border-radius: $size-xs;
+      }
+    }
+
+    &.ios {
+      ion-toolbar {
+        --border-width: 0 !important;
+      }
     }
   }
 }
