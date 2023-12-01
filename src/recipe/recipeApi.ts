@@ -121,10 +121,7 @@ export function getRecipesByQuery(
   query: string,
   { onSuccess, onError }: Boolbacks<RecipesPayload>
 ) {
-  log("getRecipesByQuery", query);
-  return;
-
-  fetch(`${import.meta.env.VITE_API}/recipes?query=${query}`)
+  fetch(`${import.meta.env.VITE_API}/recipes/search/${query}`)
     .then((r) => r.json())
     .then(
       ({

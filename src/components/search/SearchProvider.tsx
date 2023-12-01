@@ -87,11 +87,11 @@ export function SearchProvider({ children }: Props) {
     // If the query is empty or less than 3 characters, return.
     if (!query || query.length < 3) return;
 
-    log("SearchProvider", { query });
-
     // Otherwise, fetch the recipes.
     getPayloadData();
   }, [isOnline, query]);
+
+  log("SearchProvider", { suggestions });
 
   return children({ query, error, isLoading, suggestions, onChangeListener });
 }
