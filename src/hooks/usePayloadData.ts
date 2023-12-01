@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Boolbacks, Payload } from "@/types";
 
 type Props<Data, Type> = {
@@ -23,7 +23,7 @@ type Props<Data, Type> = {
 };
 
 /**
- * A hook that stays in sync with network connectivity, fetches data, caches it, and re-fetches it when the network is back.
+ * A hook that fetches data and handles error and loading states.
  */
 export function usePayloadData<Data, Type>({
   getData,
@@ -47,7 +47,7 @@ export function usePayloadData<Data, Type>({
    * Get the payload and set the data.
    * Call this function whenever you want to fetch the data.
    */
-  function getPayloadData() {
+  const getPayloadData = useCallback(() => {
     // In case we're not loading,
     // Which is the case when we have either recipes or an error.
     if (!isLoading) {
@@ -56,19 +56,17 @@ export function usePayloadData<Data, Type>({
       setError(null);
     }
 
-    setTimeout(() => {
-      getData({
-        onError: ({ message }) => {
-          setData(null);
-          setError(new Error(message));
-        },
-        onSuccess: ({ data }) => {
-          setError(null);
-          setData(data);
-        },
-      });
-    }, 3000);
-  }
+    getData({
+      onError: ({ message }) => {
+        setData(null);
+        setError(new Error(message));
+      },
+      onSuccess: ({ data }) => {
+        setError(null);
+        setData(data);
+      },
+    });
+  }, [getData, isLoading]);
 
   return {
     error,

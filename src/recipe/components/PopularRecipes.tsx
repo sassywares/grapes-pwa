@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NO_INTERNET } from "@/config";
-import { useIsOnline, usePayloadData } from "@/hooks";
 import { isValidArray, isValidObject, log } from "@/utils";
+import { useHttpEffect, useIsOnline, usePayloadData } from "@/hooks";
 import { getCachedPopularRecipes, getPopularRecipes } from "../recipeApi";
 
 // Components
@@ -60,7 +60,7 @@ export function PopularRecipesGridItems() {
   /**
    * Effect: Fetch popular recipes.
    */
-  useEffect(() => {
+  useHttpEffect(() => {
     // We fetch only when we're online.
     if (!isOnline) {
       return;

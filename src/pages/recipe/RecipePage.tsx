@@ -1,9 +1,9 @@
+import { useState } from "react";
 import { IonPage } from "@ionic/react";
-import { useEffect, useState } from "react";
 import { isValidObject, log } from "@/utils";
 import { NO_INTERNET, routes } from "@/config";
 import { RecipeDetail, SkeletonRecipeDetail } from "@/recipe/components";
-import { useIsOnline, usePayloadData } from "@/hooks";
+import { useHttpEffect, useIsOnline, usePayloadData } from "@/hooks";
 import { Recipe, getRecipeById, isRecipe } from "@/recipe";
 import { Redirect, useHistory, useParams } from "react-router";
 import {
@@ -72,7 +72,7 @@ export function RecipePage() {
   /**
    * Effect: Fetch the recipe if it isn't already in state.
    */
-  useEffect(() => {
+  useHttpEffect(() => {
     // We fetch only when we're online.
     if (!isOnline) {
       return;

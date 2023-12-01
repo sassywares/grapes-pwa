@@ -12,6 +12,7 @@ import {
   IonToolbar,
 } from "@ionic/react";
 import { log } from "@/utils";
+import { SearchProvider } from "./search/SearchProvider";
 
 type Props = {
   children: ReactNode | ((params: ReturnType<typeof useModal>) => ReactNode);
@@ -35,11 +36,21 @@ export function PageWithSearch({ children }: Props) {
           onIonModalDidDismiss={dismiss}
           onIonModalDidPresent={() => searchBarRef.current?.setFocus()}
         >
-          <IonHeader>
-            <IonToolbar>
-              <SearchBar autoFocus onClickCancel={dismiss} ref={searchBarRef} />
-            </IonToolbar>
-          </IonHeader>
+          <SearchProvider>
+            {({ suggestions, query, onChangeListener }) => (
+              <IonHeader>
+                <IonToolbar>
+                  <SearchBar
+                    autoFocus
+                    value={query}
+                    ref={searchBarRef}
+                    onClickCancel={dismiss}
+                    onChangeSearch={onChangeListener}
+                  />
+                </IonToolbar>
+              </IonHeader>
+            )}
+          </SearchProvider>
         </IonModal>
         {typeof children !== "function" ? children : children(modalProps)}
       </IonContent>

@@ -2,21 +2,24 @@ import { forwardRef } from "react";
 import { IonSearchbar } from "@ionic/react";
 
 type Props = {
+  value?: string;
   autoFocus?: boolean;
   onClickCancel?: () => void;
+  onChangeSearch?: (e: CustomEvent) => void;
 };
 
 export const SearchBar = forwardRef<HTMLIonSearchbarElement, Props>(
-  ({ autoFocus = false, onClickCancel }, ref) => {
+  ({ value, autoFocus = false, onClickCancel, onChangeSearch }, ref) => {
     return (
       <IonSearchbar
         ref={ref}
-        debounce={1000}
+        value={value}
         autoFocus={autoFocus}
         showClearButton="always"
         showCancelButton="always"
+        onIonInput={onChangeSearch}
         onIonCancel={onClickCancel}
-        placeholder="Search grape things here 🍇"
+        placeholder="Search grape things 🍇"
       />
     );
   }

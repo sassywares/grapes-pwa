@@ -1,5 +1,6 @@
 import { Boolbacks, Response } from "@/types";
 import { Recipe, RecipePayload, RecipesPayload } from "./recipeTypes";
+import { log } from "@/utils";
 
 const defaultError = { message: "Something went wrong" };
 
@@ -103,6 +104,34 @@ export function getRecipeById(
     .then((r) => r.json())
     .then(
       ({ status, payload, errors = defaultError }: Response<RecipePayload>) => {
+        if (status === 200) {
+          onSuccess?.(payload);
+        } else {
+          onError?.(errors);
+        }
+      }
+    )
+    .catch((e) => {
+      console.error(e);
+      onError?.(defaultError);
+    });
+}
+
+export function getRecipesByQuery(
+  query: string,
+  { onSuccess, onError }: Boolbacks<RecipesPayload>
+) {
+  log("getRecipesByQuery", query);
+  return;
+
+  fetch(`${import.meta.env.VITE_API}/recipes?query=${query}`)
+    .then((r) => r.json())
+    .then(
+      ({
+        status,
+        payload,
+        errors = defaultError,
+      }: Response<RecipesPayload>) => {
         if (status === 200) {
           onSuccess?.(payload);
         } else {

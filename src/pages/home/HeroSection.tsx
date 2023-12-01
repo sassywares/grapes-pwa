@@ -1,3 +1,4 @@
+import { scrollIntoViewById } from "@/utils";
 import { IonButton } from "@ionic/react";
 
 export function HeroSection({
@@ -23,8 +24,8 @@ export function HeroSection({
       <div className="flex gap-content justify-center md:justify-start w-full">
         <IonButton
           color="tertiary"
-          href="#popularRecipes"
           className="w-full sm:w-auto"
+          onClick={() => scrollIntoViewById("popularRecipes")}
         >
           Browse Recipes
         </IonButton>

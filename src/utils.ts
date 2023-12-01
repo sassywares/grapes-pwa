@@ -13,3 +13,11 @@ export function isValidObject(
 ): value is Record<string, unknown> {
   return Object.prototype.toString.call(value) === "[object Object]";
 }
+
+export function scrollIntoViewById(id: string) {
+  const element = document.getElementById(id);
+
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+}
