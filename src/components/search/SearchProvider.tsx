@@ -81,15 +81,21 @@ export function SearchProvider({ children }: Props) {
   /**
    * Effect: Fetch recipes when the query changes or when the user comes online.
    */
-  useHttpEffect(() => {
-    if (!isOnline) return;
+  useHttpEffect(
+    (controller) => {
+      if (!isOnline) return;
 
-    // If the query is empty or less than 3 characters, return.
-    if (!query || query.length < 3) return;
+      // If the query is empty or less than 3 characters, return.
+      if (!query || query.length < 3) {
+        controller.abort();
+        return;
+      }
 
-    // Otherwise, fetch the recipes.
-    getPayloadData();
-  }, [isOnline, query]);
+      // Otherwise, fetch the recipes.
+      getPayloadData();
+    },
+    [isOnline, query]
+  );
 
   log("SearchProvider", { suggestions });
 

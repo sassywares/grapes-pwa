@@ -223,10 +223,16 @@ ion-chip {
   padding-left: $size-2xs;
 }
 
-// Searchbar
-ion-modal ion-searchbar.ios {
-  @include when-md {
-    padding-top: $size-sm !important;
+ion-modal {
+  .ion-page {
+    justify-content: flex-start;
+  }
+
+  // Searchbar
+  ion-searchbar.ios {
+    @include when-md {
+      padding-top: $size-sm !important;
+    }
   }
 }
 

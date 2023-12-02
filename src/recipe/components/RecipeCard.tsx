@@ -21,11 +21,8 @@ export function RecipeCard(recipe: Recipe) {
     <IonCard className="ion-activatable recipe">
       <Link
         title={title}
+        to={routes.getRecipe(recipe)}
         className="absolute top-0 left-0 w-full h-full"
-        to={{
-          state: recipe,
-          pathname: routes.getRecipe(recipeId),
-        }}
       />
       <RecipeImage src={image} alt={title} />
       <IonCardHeader>

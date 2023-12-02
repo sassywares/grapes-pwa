@@ -33,6 +33,7 @@ import {
   IonListHeader,
 } from "@ionic/react";
 import { RecipeImage } from "./RecipeImage";
+import { useInstructions, useNutrients } from "../hooks";
 
 export function RecipeDetail(recipe: Recipe) {
   const {
@@ -45,37 +46,12 @@ export function RecipeDetail(recipe: Recipe) {
     healthScore,
     servings = 1,
     sustainable,
-    veryHealthy,
     vegan,
   } = recipe;
 
-  // Nutrients
-  const nutrientsList = JSON.parse(nutrients || "[]");
-
-  const calories = nutrientsList.find((nutrient: Nutrient) => {
-    return nutrient.name === "Calories";
-  });
-
-  const protein = nutrientsList.find((nutrient: Nutrient) => {
-    return nutrient.name === "Protein";
-  });
-
-  const carbs = nutrientsList.find((nutrient: Nutrient) => {
-    return nutrient.name === "Carbohydrates";
-  });
-
-  // Instructions
-  const instructions: AnalyzedInstructions = JSON.parse(
-    analyzedInstructions || "[]"
-  );
-
-  log("RecipeDetailComponent", { healthScore, instructions });
-
-  const steps =
-    instructions && instructions.length > 0 && instructions[0].steps;
-
-  const equipment: RecipeEquipment[] = [];
-  const ingredients: RecipeIngredient[] = [];
+  const { calories, carbs, protein } = useNutrients(nutrients);
+  const { steps, equipment, ingredients } =
+    useInstructions(analyzedInstructions);
 
   if (steps) {
     // Get all equipment and ingredients
@@ -98,47 +74,49 @@ export function RecipeDetail(recipe: Recipe) {
 
   return (
     <IonContent className="recipe">
-      <RecipeImage src={image} alt={title}>
-        {/* Image Badges */}
-        <div className="absolute p-content bottom-0 left-0 w-full flex gap-content flex-wrap">
-          {/* Health Score */}
-          {healthScore &&
-            healthScore > 0 &&
-            (healthScore > 66 ? (
+      <section className="container">
+        <RecipeImage src={image} alt={title}>
+          {/* Image Badges */}
+          <div className="absolute p-content bottom-0 left-0 w-full flex gap-content flex-wrap">
+            {/* Health Score */}
+            {healthScore &&
+              healthScore > 0 &&
+              (healthScore > 66 ? (
+                <IonBadge color="success">
+                  <IonIcon icon={heart} aria-hidden="true" />
+                  Very Healthy
+                </IonBadge>
+              ) : healthScore > 33 ? (
+                <IonBadge color="warning">
+                  <IonIcon icon={heart} aria-hidden="true" />
+                  Healthy
+                </IonBadge>
+              ) : (
+                <IonBadge color="danger">
+                  <IonIcon icon={heart} aria-hidden="true" />
+                  Unhealthy
+                </IonBadge>
+              ))}
+            {/* Sustainable */}
+            {sustainable == 1 && (
               <IonBadge color="success">
-                <IonIcon icon={heart} aria-hidden="true" />
-                Very Healthy
+                <IonIcon icon={leaf} aria-hidden="true" />
+                Sustainable
               </IonBadge>
-            ) : healthScore > 33 ? (
-              <IonBadge color="warning">
-                <IonIcon icon={heart} aria-hidden="true" />
-                Healthy
+            )}
+            {/* Vegan */}
+            {vegan == 1 && (
+              <IonBadge color="success">
+                <IonIcon icon={leaf} aria-hidden="true" />
+                Vegan
               </IonBadge>
-            ) : (
-              <IonBadge color="danger">
-                <IonIcon icon={heart} aria-hidden="true" />
-                Unhealthy
-              </IonBadge>
-            ))}
-          {/* Sustainable */}
-          {sustainable == 1 && (
-            <IonBadge color="success">
-              <IonIcon icon={leaf} aria-hidden="true" />
-              Sustainable
-            </IonBadge>
-          )}
-          {/* Vegan */}
-          {vegan == 1 && (
-            <IonBadge color="success">
-              <IonIcon icon={leaf} aria-hidden="true" />
-              Vegan
-            </IonBadge>
-          )}
-        </div>
-      </RecipeImage>
+            )}
+          </div>
+        </RecipeImage>
+      </section>
 
       {/* Body */}
-      <div className="p-content flex flex-col gap-content">
+      <div className="p-content flex flex-col gap-content container">
         {/* Header */}
         <div className="flex flex-wrap gap-content items-start justify-between">
           {/* Title */}
@@ -180,7 +158,7 @@ export function RecipeDetail(recipe: Recipe) {
           />
         )} */}
       </div>
-      <IonList lines="full">
+      <IonList lines="full" className="container">
         <IonListHeader>
           <IonLabel>
             <h2>Details</h2>
