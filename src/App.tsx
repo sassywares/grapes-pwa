@@ -33,15 +33,20 @@ import { HomePage } from "./pages/home";
 import { RecipePage } from "./pages/recipe";
 import { PageWithError } from "./components";
 
-const mode = new URLSearchParams(window.location.search).get("mode");
+// const mode = new URLSearchParams(window.location.search).get("mode");
 
-if (mode) {
-  setupIonicReact({
-    mode: mode as any,
-  });
-} else {
-  setupIonicReact();
-}
+// if (mode) {
+//   setupIonicReact({
+//     mode: mode as any,
+//   });
+// } else {
+//   setupIonicReact();
+// }
+
+// Always ios
+setupIonicReact({
+  mode: "ios",
+});
 
 const App: React.FC = () => (
   <IonApp>
@@ -54,7 +59,7 @@ const App: React.FC = () => (
           <HomePage />
         </Route>
         <Route>
-          <PageWithError error={new Error("Page Not Found")} />
+          <PageWithError error={{ message: "Page Not Found" }} />
         </Route>
       </IonRouterOutlet>
       {/* <IonTabs>

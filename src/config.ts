@@ -2,6 +2,7 @@ import { Recipe } from "./recipe";
 
 export const APP_NAME = "Grape! 🍇";
 export const APP_EMAIL = "begrape@sassywares.com";
+export const SASSYWARES_URL = "https://sassywares.com?utm_source=grape";
 export const PLAYSTORE_URL =
   "https://play.google.com/store/apps/details?id=com.sassywares.grape";
 export const APPSTORE_URL =

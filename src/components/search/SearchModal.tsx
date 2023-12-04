@@ -17,7 +17,11 @@ import {
   IonNote,
 } from "@ionic/react";
 
-export function SearchModal() {
+export function SearchModal({
+  presentingElement,
+}: {
+  presentingElement?: HTMLElement;
+}) {
   const history = useHistory();
   const { isOpen, dismiss } = useModal();
   const searchBarRef = useRef<HTMLIonSearchbarElement>(null);
@@ -25,6 +29,7 @@ export function SearchModal() {
   return (
     <IonModal
       isOpen={isOpen}
+      presentingElement={presentingElement}
       onIonModalWillDismiss={() => dismiss()}
       onIonModalDidPresent={() => searchBarRef.current?.setFocus()}
     >
@@ -76,9 +81,7 @@ export function SearchModal() {
                       button
                       key={recipeId}
                       onClick={() => {
-                        history.push(
-                          routes.getRecipe(suggestion, `search=${query}`)
-                        );
+                        history.push(routes.getRecipe(suggestion));
                         dismiss();
                       }}
                     >

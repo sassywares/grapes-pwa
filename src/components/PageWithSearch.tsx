@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useRef } from "react";
 import { ModalProvider } from "./modal";
 
 // Components
@@ -12,13 +12,15 @@ type Props = {
 };
 
 export function PageWithSearch({ children }: Props) {
+  const pageRef = useRef();
+
   return (
-    <IonPage>
+    <IonPage ref={pageRef}>
       <ModalProvider>
         <HeaderSearchComponent />
         <PageContent>
           {/* Search Modal */}
-          <SearchModal />
+          <SearchModal presentingElement={pageRef.current} />
           {children}
         </PageContent>
       </ModalProvider>

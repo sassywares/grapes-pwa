@@ -103,8 +103,11 @@ section {
   padding-bottom: var(--ion-padding);
 }
 
+a,
 ion-card,
 ion-button::part(native) {
+  border-radius: $size-xs;
+
   &:focus-within {
     outline: $outline-primary;
   }

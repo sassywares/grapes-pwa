@@ -133,7 +133,7 @@ export function PopularRecipes() {
       </section>
       <section
         id="popularRecipesFooter"
-        className="container ion-padding w-full items-start justify-start"
+        className="container ion-padding w-full items-start justify-start pb-10 md:pb-20"
       >
         <IonText className="prose prose-h2:text-white">
           <h2>Not what you're looking for?</h2>
