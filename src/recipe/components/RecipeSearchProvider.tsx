@@ -10,14 +10,16 @@ import {
 } from "@/hooks";
 import { ResponseErrors } from "@/types";
 
+export type SearchProviderReturns = {
+  query: string;
+  isLoading: boolean;
+  error: ResponseErrors;
+  suggestions: Recipe[] | null;
+  onChangeListener: (e: CustomEvent) => void;
+};
+
 type Props = {
-  children: (params: {
-    query: string;
-    isLoading: boolean;
-    error: ResponseErrors;
-    suggestions: Recipe[] | null;
-    onChangeListener: (e: CustomEvent) => void;
-  }) => React.ReactNode;
+  children: (params: SearchProviderReturns) => React.ReactNode;
 };
 
 // 0. ✅ setup suggestions and query states
@@ -25,7 +27,7 @@ type Props = {
 // 2. Show loading
 // 3. Show errors
 
-export function SearchProvider({ children }: Props) {
+export function RecipeSearchProvider({ children }: Props) {
   const isOnline = useIsOnline();
   let initialError: ResponseErrors = null;
 

@@ -3,7 +3,7 @@ import mockRecipes from "@cypress/fixtures/recipes.json";
 
 // Test utils
 import { Recipe, recipeConfig } from "@/recipe";
-import { PopularRecipesRenderer } from "./index";
+import { PopularRecipesRenderer } from "./PopularRecipes";
 import { renderComponent, renderComponentInRouter } from "@/testUtils";
 
 const defaultProps: Parameters<typeof PopularRecipesRenderer>[0] = {

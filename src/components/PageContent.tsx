@@ -8,7 +8,7 @@ export function PageContent({ children, ...props }: Props) {
   return (
     <IonContent {...props} fullscreen>
       {children}
-      <footer className="hidden desktop:block p-content bg-tertiary-shade">
+      <footer className="hidden desktop:block mt-20 p-content bg-tertiary-shade">
         <div className="container p-content flex items-center sm:flex-row flex-col text-tertiary-contrast">
           <h2 className="flex-shrink-0">Grape! 🍇</h2>
           <p className="text-lg sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0">

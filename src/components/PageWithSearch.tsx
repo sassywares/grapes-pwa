@@ -3,8 +3,8 @@ import { ModalProvider } from "./modal";
 
 // Components
 import { IonPage } from "@ionic/react";
-import { SearchModal } from "./search";
 import { PageContent } from "./PageContent";
+import { RecipeSearchModal } from "@/recipe/components";
 import { HeaderSearchComponent } from "./header/variants";
 
 type Props = {
@@ -20,7 +20,7 @@ export function PageWithSearch({ children }: Props) {
         <HeaderSearchComponent />
         <PageContent>
           {/* Search Modal */}
-          <SearchModal presentingElement={pageRef.current} />
+          <RecipeSearchModal presentingElement={pageRef.current} />
           {children}
         </PageContent>
       </ModalProvider>
