@@ -18,7 +18,10 @@ export function RecipeCard(recipe: Recipe) {
   const { image, title, readyInMinutes, aggregateLikes } = recipe;
 
   return (
-    <IonCard className="ion-activatable recipe group hover:scale-95">
+    <IonCard
+      role="article"
+      className="ion-activatable recipe group hover:scale-95"
+    >
       <Link
         title={title}
         to={routes.getRecipe(recipe)}

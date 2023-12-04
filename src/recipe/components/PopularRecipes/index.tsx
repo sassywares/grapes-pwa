@@ -4,12 +4,12 @@ import { search } from "ionicons/icons";
 import { useModal } from "@/components/modal";
 import { isValidArray, isValidObject, log } from "@/utils";
 import { useHttpEffect, useIsOnline, usePayloadData } from "@/hooks";
-import { getCachedPopularRecipes, getPopularRecipes } from "../recipeApi";
+import { getCachedPopularRecipes, getPopularRecipes } from "../../recipeApi";
 
 // Components
-import { Recipe } from "../recipeTypes";
-import { RecipeCard } from "./RecipeCard";
-import { SkeletonRecipeCard } from "./SkeletonRecipeCard";
+import { Recipe } from "../../recipeTypes";
+import { RecipeCard } from "../RecipeCard";
+import { SkeletonRecipeCard } from "../SkeletonRecipeCard";
 import {
   IonGrid,
   IonRow,
@@ -19,7 +19,49 @@ import {
   IonIcon,
 } from "@ionic/react";
 import { ResponseErrors } from "@/types";
-import { recipeConfig } from "..";
+
+export function PopularRecipesRenderer({
+  error,
+  recipes,
+  isLoading,
+}: {
+  isLoading: boolean;
+  error: ResponseErrors;
+  recipes: Recipe[] | null;
+}) {
+  /**
+   * Possible cases.
+   * 1. Loading
+   * 2. Error
+   * 3. Success (recipes, no error)
+   */
+
+  // 1. Loading
+  if (isLoading) {
+    return [...Array(10)].map((_, index) => (
+      <IonCol key={index}>
+        <SkeletonRecipeCard />
+      </IonCol>
+    ));
+  }
+
+  // 2. Error
+  if (error) {
+    return (
+      <IonCol className="!w-full !max-w-full">
+        <p role="alert" className="text-center">
+          {error.message}
+        </p>
+      </IonCol>
+    );
+  }
+
+  return recipes?.map(({ recipeId, ...recipe }) => (
+    <IonCol key={recipeId}>
+      <RecipeCard {...recipe} recipeId={recipeId} />
+    </IonCol>
+  ));
+}
 
 export function PopularRecipesGridItems() {
   const isOnline = useIsOnline();
@@ -81,38 +123,7 @@ export function PopularRecipesGridItems() {
     getPayloadData();
   }, [isOnline]);
 
-  /**
-   * Possible cases.
-   * 1. Loading
-   * 2. Error
-   * 3. Success (recipes, no error)
-   */
-
-  // 1. Loading
-  if (isLoading) {
-    return [...Array(recipeConfig.SKELETON_CARD_COUNT)].map((_, index) => (
-      <IonCol key={index}>
-        <SkeletonRecipeCard />
-      </IonCol>
-    ));
-  }
-
-  // 2. Error
-  if (error) {
-    return (
-      <IonCol className="!w-full !max-w-full">
-        <p role="alert" className="text-center">
-          {error.message}
-        </p>
-      </IonCol>
-    );
-  }
-
-  return recipes?.map(({ recipeId, ...recipe }) => (
-    <IonCol key={recipeId}>
-      <RecipeCard {...recipe} recipeId={recipeId} />
-    </IonCol>
-  ));
+  return <PopularRecipesRenderer {...{ recipes, isLoading, error }} />;
 }
 
 export function PopularRecipes() {
