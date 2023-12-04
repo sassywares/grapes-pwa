@@ -33,3 +33,9 @@
     @content;
   }
 }
+
+@mixin when-desktop {
+  .plt-desktop & {
+    @content;
+  }
+}

@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { Boolbacks, Payload } from "@/types";
+import { Boolbacks, Payload, ResponseErrors } from "@/types";
 
 type Props<Data, Type> = {
   /**
@@ -19,7 +19,7 @@ type Props<Data, Type> = {
   /**
    * If an error needs to be shown initially, pass it here.
    */
-  initialError?: Error | null;
+  initialError?: ResponseErrors;
 };
 
 /**
@@ -57,9 +57,9 @@ export function usePayloadData<Data, Type>({
     }
 
     getData({
-      onError: ({ message }) => {
+      onError: (errors) => {
         setData(null);
-        setError(new Error(message));
+        setError(errors);
       },
       onSuccess: ({ data }) => {
         setError(null);

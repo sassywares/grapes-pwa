@@ -1,3 +1,4 @@
+import { routes } from "@/config";
 import { heart } from "ionicons/icons";
 
 // Components
@@ -11,14 +12,13 @@ import {
 } from "@ionic/react";
 import { Recipe } from "../recipeTypes";
 import { Link } from "react-router-dom";
-import { routes } from "@/config";
 import { RecipeImage } from "./RecipeImage";
 
 export function RecipeCard(recipe: Recipe) {
-  const { image, title, recipeId, readyInMinutes, aggregateLikes } = recipe;
+  const { image, title, readyInMinutes, aggregateLikes } = recipe;
 
   return (
-    <IonCard className="ion-activatable recipe">
+    <IonCard className="ion-activatable recipe group hover:scale-95">
       <Link
         title={title}
         to={routes.getRecipe(recipe)}

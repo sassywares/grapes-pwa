@@ -1,1 +1,3 @@
-export { SearchBar } from "./SearchBar";
+export * from "./SearchBar";
+export * from "./SearchModal";
+export * from "./SearchProvider";

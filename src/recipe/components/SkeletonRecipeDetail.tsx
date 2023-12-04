@@ -1,5 +1,6 @@
 import React from "react";
-import { IonContent, IonSkeletonText, IonThumbnail } from "@ionic/react";
+import { PageContent } from "@/components";
+import { IonSkeletonText, IonThumbnail } from "@ionic/react";
 
 export const SkeletonRecipeDetail: React.FC = () => {
   const renderSkeletonText = (width: string) => (
@@ -7,7 +8,7 @@ export const SkeletonRecipeDetail: React.FC = () => {
   );
 
   return (
-    <IonContent className="recipe">
+    <PageContent className="recipe">
       {/* Recipe Image */}
       <div className="recipe-image">
         <IonThumbnail aria-hidden="true">
@@ -50,6 +51,6 @@ export const SkeletonRecipeDetail: React.FC = () => {
           />
         ))}
       </div>
-    </IonContent>
+    </PageContent>
   );
 };

@@ -11,6 +11,7 @@ import {
   HeaderLoadingComponent,
 } from "@/components/header/variants";
 import { PageWithError } from "@/components";
+import { ResponseErrors } from "@/types";
 
 type Params = {
   /**
@@ -25,7 +26,7 @@ export function RecipePage() {
   const isOnline = useIsOnline();
   const { recipeId } = useParams<Params>();
 
-  let initialError: Error | null = null;
+  let initialError: ResponseErrors = null;
 
   /**
    * The recipe that was selected from the previous page.
@@ -48,7 +49,7 @@ export function RecipePage() {
         }
 
         // If we are offline, set error and return null.
-        initialError = new Error(NO_INTERNET);
+        initialError = { message: NO_INTERNET };
         return null;
       }
 
@@ -86,7 +87,7 @@ export function RecipePage() {
 
     // If id can't be parsed to number, it's a bad id.
     if (isNaN(Number(recipeId))) {
-      setError(new Error("Invalid recipe ID."));
+      setError({ message: "Invalid recipe ID." });
       return;
     }
 

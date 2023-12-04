@@ -6,13 +6,11 @@ import { PopularRecipes } from "@/recipe/components";
 export const HomePage: React.FC = () => {
   return (
     <PageWithSearch>
-      {({ open }) => (
-        <>
-          <HeroSection openSearchModal={open} />
-          {/* Popular Recipes */}
-          <PopularRecipes />
-        </>
-      )}
+      <>
+        <HeroSection />
+        {/* Popular Recipes */}
+        <PopularRecipes />
+      </>
     </PageWithSearch>
   );
 };

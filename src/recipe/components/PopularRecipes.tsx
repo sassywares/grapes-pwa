@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { NO_INTERNET } from "@/config";
+import { search } from "ionicons/icons";
+import { useModal } from "@/components/modal";
 import { isValidArray, isValidObject, log } from "@/utils";
 import { useHttpEffect, useIsOnline, usePayloadData } from "@/hooks";
 import { getCachedPopularRecipes, getPopularRecipes } from "../recipeApi";
@@ -8,7 +10,15 @@ import { getCachedPopularRecipes, getPopularRecipes } from "../recipeApi";
 import { Recipe } from "../recipeTypes";
 import { RecipeCard } from "./RecipeCard";
 import { SkeletonRecipeCard } from "./SkeletonRecipeCard";
-import { IonGrid, IonRow, IonText, IonCol } from "@ionic/react";
+import {
+  IonGrid,
+  IonRow,
+  IonText,
+  IonCol,
+  IonButton,
+  IonIcon,
+} from "@ionic/react";
+import { ResponseErrors } from "@/types";
 
 export function PopularRecipesGridItems() {
   const isOnline = useIsOnline();
@@ -16,7 +26,7 @@ export function PopularRecipesGridItems() {
   /**
    * Initially, there is no error
    */
-  let initialError: Error | null = null;
+  let initialError: ResponseErrors = null;
 
   /**
    * The cached recipes, might be null.
@@ -36,7 +46,7 @@ export function PopularRecipesGridItems() {
       if (!isValidObject(probablyCachedData)) {
         // Set error state.
         log("We are offline and not cached.");
-        initialError = new Error(NO_INTERNET);
+        initialError = { message: NO_INTERNET };
         return null;
       }
 
@@ -105,18 +115,34 @@ export function PopularRecipesGridItems() {
 }
 
 export function PopularRecipes() {
+  const { open } = useModal();
+
   return (
-    <section id="popularRecipes" className="container">
-      <IonGrid>
-        <IonRow className="ion-padding-horizontal">
-          <IonText className="prose prose-h2:text-white">
-            <h2>Snacks grape people love 🧡</h2>
-          </IonText>
-        </IonRow>
-        <IonRow>
-          <PopularRecipesGridItems />
-        </IonRow>
-      </IonGrid>
-    </section>
+    <>
+      <section id="popularRecipes" className="container">
+        <IonGrid>
+          <IonRow className="ion-padding-horizontal">
+            <IonText className="prose prose-h2:text-white">
+              <h2>Snacks grape people love 🧡</h2>
+            </IonText>
+          </IonRow>
+          <IonRow>
+            <PopularRecipesGridItems />
+          </IonRow>
+        </IonGrid>
+      </section>
+      <section
+        id="popularRecipesFooter"
+        className="container ion-padding w-full items-start justify-start"
+      >
+        <IonText className="prose prose-h2:text-white">
+          <h2>Not what you're looking for?</h2>
+        </IonText>
+        <IonButton color="tertiary" onClick={open}>
+          <IonIcon slot="start" icon={search} />
+          Search across grape
+        </IonButton>
+      </section>
+    </>
   );
 }

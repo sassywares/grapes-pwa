@@ -8,12 +8,13 @@ import {
   usePayloadData,
   useDebouncedFunction,
 } from "@/hooks";
+import { ResponseErrors } from "@/types";
 
 type Props = {
   children: (params: {
     query: string;
     isLoading: boolean;
-    error: Error | null;
+    error: ResponseErrors;
     suggestions: Recipe[] | null;
     onChangeListener: (e: CustomEvent) => void;
   }) => React.ReactNode;
@@ -26,7 +27,7 @@ type Props = {
 
 export function SearchProvider({ children }: Props) {
   const isOnline = useIsOnline();
-  let initialError: Error | null = null;
+  let initialError: ResponseErrors = null;
 
   /**
    * The searched query.
@@ -42,7 +43,7 @@ export function SearchProvider({ children }: Props) {
     (() => {
       // If not online, set the initial error.
       if (!isOnline) {
-        initialError = new Error(NO_INTERNET);
+        initialError = { message: NO_INTERNET };
         return null;
       }
 
@@ -97,7 +98,7 @@ export function SearchProvider({ children }: Props) {
     [isOnline, query]
   );
 
-  log("SearchProvider", { suggestions });
+  log("SearchProvider", { suggestions, error });
 
   return children({ query, error, isLoading, suggestions, onChangeListener });
 }

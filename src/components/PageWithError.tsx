@@ -1,17 +1,19 @@
 import { routes } from "@/config";
 
 // Components
+import { ResponseErrors } from "@/types";
+import { PageContent } from "./PageContent";
+import { IonPage, IonButton } from "@ionic/react";
 import { HeaderErrorComponent } from "./header/variants";
-import { IonPage, IonContent, IonButton } from "@ionic/react";
 
-export function PageWithError({ error }: { error: Error }) {
+export function PageWithError({ error }: { error: ResponseErrors }) {
   return (
     <IonPage>
       <HeaderErrorComponent />
-      <IonContent fullscreen>
+      <PageContent>
         <div className="p-content flex flex-col justify-center items-center gap-content">
           <p role="alert" className="text-center">
-            {error.message}
+            {error?.message}
           </p>
           <div className="flex items-center justify-center gap-content">
             <IonButton color="tertiary" routerLink={routes.home}>
@@ -26,7 +28,7 @@ export function PageWithError({ error }: { error: Error }) {
             </IonButton>
           </div>
         </div>
-      </IonContent>
+      </PageContent>
     </IonPage>
   );
 }

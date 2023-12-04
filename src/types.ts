@@ -26,7 +26,7 @@ export type Payload<Data, Type> = {
 export type ResponseErrors = {
   message: string;
   [key: string]: string;
-};
+} | null;
 
 export type Response<Payload> = {
   status: number;

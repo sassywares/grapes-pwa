@@ -31,6 +31,7 @@ import { IonApp, setupIonicReact, IonRouterOutlet } from "@ionic/react";
 // Pages
 import { HomePage } from "./pages/home";
 import { RecipePage } from "./pages/recipe";
+import { PageWithError } from "./components";
 
 const mode = new URLSearchParams(window.location.search).get("mode");
 
@@ -51,6 +52,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path={routes.home}>
           <HomePage />
+        </Route>
+        <Route>
+          <PageWithError error={new Error("Page Not Found")} />
         </Route>
       </IonRouterOutlet>
       {/* <IonTabs>

@@ -1,29 +1,11 @@
-import { log } from "@/utils";
-import {
-  AnalyzedInstructions,
-  Nutrient,
-  Recipe,
-  RecipeEquipment,
-  RecipeIngredient,
-} from "../recipeTypes";
-import {
-  time,
-  flame,
-  heart,
-  leaf,
-  star,
-  thumbsDown,
-  thumbsUp,
-} from "ionicons/icons";
+import { Recipe } from "../recipeTypes";
+import { useInstructions, useNutrients } from "../hooks";
+import { time, flame, heart, leaf } from "ionicons/icons";
 
 // Components
 import {
   IonBadge,
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
   IonChip,
-  IonContent,
   IonIcon,
   IonItem,
   IonItemDivider,
@@ -32,8 +14,8 @@ import {
   IonList,
   IonListHeader,
 } from "@ionic/react";
+import { PageContent } from "@/components";
 import { RecipeImage } from "./RecipeImage";
-import { useInstructions, useNutrients } from "../hooks";
 
 export function RecipeDetail(recipe: Recipe) {
   const {
@@ -53,33 +35,14 @@ export function RecipeDetail(recipe: Recipe) {
   const { steps, equipment, ingredients } =
     useInstructions(analyzedInstructions);
 
-  if (steps) {
-    // Get all equipment and ingredients
-    steps.forEach((step) => {
-      // Add equipment if not already in list
-      step.equipment.forEach((e) => {
-        if (!equipment.find((eq) => eq.name === e.name)) {
-          equipment.push(e);
-        }
-      });
-
-      // Add ingredients if not already in list
-      step.ingredients.forEach((i) => {
-        if (!ingredients.find((ing) => ing.name === i.name)) {
-          ingredients.push(i);
-        }
-      });
-    });
-  }
-
   return (
-    <IonContent className="recipe">
-      <section className="container">
-        <RecipeImage src={image} alt={title}>
+    <PageContent className="recipe">
+      <div className="container">
+        <RecipeImage src={image} alt={title} className="md:!aspect-[16/6]">
           {/* Image Badges */}
           <div className="absolute p-content bottom-0 left-0 w-full flex gap-content flex-wrap">
             {/* Health Score */}
-            {healthScore &&
+            {!!healthScore &&
               healthScore > 0 &&
               (healthScore > 66 ? (
                 <IonBadge color="success">
@@ -113,7 +76,7 @@ export function RecipeDetail(recipe: Recipe) {
             )}
           </div>
         </RecipeImage>
-      </section>
+      </div>
 
       {/* Body */}
       <div className="p-content flex flex-col gap-content container">
@@ -259,6 +222,6 @@ export function RecipeDetail(recipe: Recipe) {
           </IonItemGroup>
         )}
       </IonList>
-    </IonContent>
+    </PageContent>
   );
 }

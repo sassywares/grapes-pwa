@@ -1,11 +1,10 @@
-import { scrollIntoViewById } from "@/utils";
 import { IonButton } from "@ionic/react";
+import { scrollIntoViewById } from "@/utils";
+import { useModal } from "@/components/modal";
 
-export function HeroSection({
-  openSearchModal,
-}: {
-  openSearchModal: () => void;
-}) {
+export function HeroSection() {
+  const { open } = useModal();
+
   return (
     <section className="p-content flex flex-col gap-content items-center md:items-start my-10 container">
       <header>
@@ -33,7 +32,7 @@ export function HeroSection({
           color="tertiary"
           fill="outline"
           className="w-full sm:w-auto"
-          onClick={openSearchModal}
+          onClick={open}
         >
           Search Recipes
         </IonButton>

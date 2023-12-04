@@ -1,9 +1,13 @@
 import { useRef, useState, useEffect, PropsWithChildren } from "react";
 import { IonThumbnail, IonSkeletonText } from "@ionic/react";
 
-type Props = PropsWithChildren<{ src?: string; alt?: string }>;
+type Props = PropsWithChildren<{
+  src?: string;
+  alt?: string;
+  className?: string;
+}>;
 
-export function RecipeImage({ src, alt, children }: Props) {
+export function RecipeImage({ src, alt, children, className = "" }: Props) {
   const imgRef = useRef<HTMLImageElement>(null);
 
   // State: Loading state
@@ -42,7 +46,7 @@ export function RecipeImage({ src, alt, children }: Props) {
   }, []);
 
   return (
-    <div className="recipe-image">
+    <div className={`recipe-image overflow-hidden ${className}`}>
       {isLoading ? (
         <IonThumbnail>
           <IonSkeletonText animated />

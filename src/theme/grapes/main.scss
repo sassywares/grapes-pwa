@@ -64,6 +64,11 @@ h1 {
     background: var(--ion-toolbar-background);
 
     &.ios {
+      --background: var(
+        --ion-toolbar-background,
+        var(--ion-color-step-50, #f7f7f7)
+      );
+      background: var(--background);
       --border-style: solid;
       --border-width: 0 0 0.55px;
       --border-color: var(
@@ -218,6 +223,7 @@ ion-chip {
   display: flex;
   gap: $size-xs;
   flex-shrink: 0;
+  cursor: text;
   align-items: center;
   font-size: $size-sm;
   padding-left: $size-2xs;
@@ -230,7 +236,7 @@ ion-modal {
 
   // Searchbar
   ion-searchbar.ios {
-    @include when-md {
+    @include when-desktop {
       padding-top: $size-sm !important;
     }
   }
@@ -268,4 +274,17 @@ ion-content.page-content {
   --padding-end: #{$size};
   --padding-bottom: #{$size};
   --padding-start: #{$size};
+}
+
+// Utils
+.desktop\:block {
+  @include when-desktop {
+    display: block !important;
+  }
+}
+
+.desktop\:flex {
+  @include when-desktop {
+    display: flex !important;
+  }
 }
