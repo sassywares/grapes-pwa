@@ -1,19 +1,18 @@
 {
   "name": "grapes-pwa",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:prod": "cross-env NODE_ENV=production npm run dev",
     "preview": "vite preview",
     "lint": "eslint",
     "test.unit": "vitest",
     "test.e2e": "cypress run",
     "test": "npm run test.unit",
-    "build": "npm run test && cross-env NODE_ENV=production tsc && vite build",
+    "build": "tsc && vite build",
     "sync": "ionic cap copy && ionic cap sync",
-    "release": "cross-env CI=true npm run build && npx changeset version && git add . && npx standard-version --releaseCommitMessageFormat='[skip ci] %s'",
+    "release": "cross-env CI=true npm run test && cross-env NODE_ENV=production npm run build && npx changeset version && git add . && npx standard-version --releaseCommitMessageFormat='[skip ci] %s'",
     "cap.assets": "npx capacitor-assets generate"
   },
   "dependencies": {
