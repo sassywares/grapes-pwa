@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/oikashan/grapes-pwa/compare/v0.0.3...v0.0.4) (2023-12-05)
+
+
+### Bug Fixes
+
+* fixed broken prod script ([73f6347](https://github.com/oikashan/grapes-pwa/commit/73f634737b1c0de82eca0a15e3672916bde93aba))
+
 ### [0.0.3](https://github.com/oikashan/grapes-pwa/compare/v0.0.2...v0.0.3) (2023-12-05)
 
 ### 0.0.2 (2023-12-05)
