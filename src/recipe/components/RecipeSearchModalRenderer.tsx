@@ -2,7 +2,8 @@ import { routes } from "@/config";
 import { useNutrients } from "../hooks";
 import { useHistory } from "react-router";
 import { SearchProviderReturns } from "./RecipeSearchProvider";
-import { IonList, IonItem, IonLabel, IonNote } from "@ionic/react";
+import { IonList, IonItem, IonLabel, IonNote, IonButton } from "@ionic/react";
+import { RetryButtons } from "@/components";
 
 export type RecipeSearchModalRendererProps = Pick<
   SearchProviderReturns,
@@ -30,12 +31,15 @@ export function RecipeSearchModalRenderer({
           </IonItem>
         </IonList>
       )}
-      {error && error.search && (
+      {error && (
         <IonList lines="none">
           <IonItem>
-            <IonLabel>
-              <h2>{error.search}</h2>
+            <IonLabel className="ion-text-wrap">
+              <h2 className="text-danger">{error.search || error.message}</h2>
             </IonLabel>
+            <div slot="end" className="flex gap-2">
+              <RetryButtons message="Found an error while searching through recipes!" />
+            </div>
           </IonItem>
         </IonList>
       )}

@@ -113,6 +113,12 @@ ion-button::part(native) {
   }
 }
 
+ion-button {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-inline: 0;
+}
+
 ion-list-header,
 ion-item-divider,
 ion-item::part(native) {

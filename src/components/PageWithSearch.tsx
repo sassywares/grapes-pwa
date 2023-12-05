@@ -1,5 +1,5 @@
-import { ReactNode, useRef } from "react";
 import { ModalProvider } from "./modal";
+import { ReactNode, useRef } from "react";
 
 // Components
 import { IonPage } from "@ionic/react";

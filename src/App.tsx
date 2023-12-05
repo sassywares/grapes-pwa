@@ -26,17 +26,13 @@ import { routes } from "./config";
 // Components
 import { Route } from "react-router-dom";
 import { IonReactRouter } from "@ionic/react-router";
-import {
-  IonApp,
-  setupIonicReact,
-  IonRouterOutlet,
-  getPlatforms,
-} from "@ionic/react";
+import { IonApp, setupIonicReact, IonRouterOutlet } from "@ionic/react";
 
 // Pages
 import { HomePage } from "./pages/home";
 import { RecipePage } from "./pages/recipe";
 import { PageWithError } from "./components";
+import { isIos } from "./utils";
 
 const mode = new URLSearchParams(window.location.search).get("mode");
 
@@ -45,14 +41,13 @@ if (mode) {
     mode: mode as any,
   });
 } else {
-  const platforms = getPlatforms();
-
   // If android, use md mode
-  if (platforms.includes("android")) {
+  if (!isIos) {
     setupIonicReact({
       mode: "md",
     });
   } else {
+    // Ios everywhere else
     setupIonicReact({
       mode: "ios",
     });

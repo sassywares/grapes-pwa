@@ -1,3 +1,7 @@
+import { getPlatforms } from "@ionic/react";
+
+export const isIos = !getPlatforms().includes("android");
+
 export function log(...params: any[]) {
   if (import.meta.env.DEV) {
     console.log("[DEV]", ...params);

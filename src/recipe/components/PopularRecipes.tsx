@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NO_INTERNET } from "@/config";
+import { APP_EMAIL, NO_INTERNET } from "@/config";
 import { search } from "ionicons/icons";
 import { useModal } from "@/components/modal";
 import { isValidArray, isValidObject, log } from "@/utils";
@@ -19,6 +19,7 @@ import {
   IonIcon,
 } from "@ionic/react";
 import { ResponseErrors } from "@/types";
+import { Alert, RetryButtons } from "@/components";
 
 export function PopularRecipesRenderer({
   error,
@@ -49,9 +50,11 @@ export function PopularRecipesRenderer({
   if (error) {
     return (
       <IonCol className="!w-full !max-w-full">
-        <p role="alert" className="text-center">
-          {error.message}
-        </p>
+        <IonCol className="!w-full !max-w-full pr-content">
+          <Alert title={error.message}>
+            <RetryButtons message="Found an error while loading popular recipes!" />
+          </Alert>
+        </IonCol>
       </IonCol>
     );
   }
@@ -63,7 +66,8 @@ export function PopularRecipesRenderer({
   ));
 }
 
-export function PopularRecipesGridItems() {
+export function PopularRecipes() {
+  const { open } = useModal();
   const isOnline = useIsOnline();
 
   /**
@@ -123,12 +127,6 @@ export function PopularRecipesGridItems() {
     getPayloadData();
   }, [isOnline]);
 
-  return <PopularRecipesRenderer {...{ recipes, isLoading, error }} />;
-}
-
-export function PopularRecipes() {
-  const { open } = useModal();
-
   return (
     <>
       <section id="popularRecipes" className="container">
@@ -139,22 +137,24 @@ export function PopularRecipes() {
             </IonText>
           </IonRow>
           <IonRow>
-            <PopularRecipesGridItems />
+            <PopularRecipesRenderer {...{ recipes, isLoading, error }} />
           </IonRow>
         </IonGrid>
       </section>
-      <section
-        id="popularRecipesFooter"
-        className="container ion-padding w-full items-start justify-start pb-10"
-      >
-        <IonText className="prose prose-h2:text-white">
-          <h2>Not what you're looking for?</h2>
-        </IonText>
-        <IonButton color="tertiary" onClick={open}>
-          <IonIcon slot="start" icon={search} />
-          Search across grape
-        </IonButton>
-      </section>
+      {!error && (
+        <section
+          id="popularRecipesFooter"
+          className="container ion-padding w-full items-start justify-start pb-10"
+        >
+          <IonText className="prose prose-h2:text-white">
+            <h2>Not what you're looking for?</h2>
+          </IonText>
+          <IonButton color="tertiary" onClick={open}>
+            <IonIcon slot="start" icon={search} />
+            Search across grape
+          </IonButton>
+        </section>
+      )}
     </>
   );
 }
