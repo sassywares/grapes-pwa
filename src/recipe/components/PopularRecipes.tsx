@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { APP_EMAIL, NO_INTERNET } from "@/config";
+import { NO_INTERNET } from "@/config";
 import { search } from "ionicons/icons";
 import { useModal } from "@/components/modal";
 import { isValidArray, isValidObject, log } from "@/utils";

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev.prod": "cross-env NODE_ENV=production vite --mode production",
     "preview": "vite preview",
     "lint": "eslint",
     "test.unit": "vitest",
@@ -12,7 +13,7 @@
     "test": "npm run test.unit",
     "build": "tsc && vite build",
     "sync": "ionic cap copy && ionic cap sync",
-    "release": "cross-env CI=true npm run test && cross-env NODE_ENV=production npm run build && npx changeset version && git add . && npx standard-version --releaseCommitMessageFormat='[skip ci] %s'",
+    "release": "cross-env CI=true npm run test && cross-env NODE_ENV=production npm run build && npm run sync && npx changeset version && git add . && npx standard-version --releaseCommitMessageFormat='[skip ci] %s'",
     "cap.assets": "npx capacitor-assets generate"
   },
   "dependencies": {

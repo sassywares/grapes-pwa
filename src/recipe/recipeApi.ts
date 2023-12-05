@@ -1,6 +1,5 @@
 import { Boolbacks, Response } from "@/types";
 import { Recipe, RecipePayload, RecipesPayload } from "./recipeTypes";
-import { log } from "@/utils";
 
 const defaultError = { message: "Something went wrong" };
 
