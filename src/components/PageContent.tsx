@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react";
 import { IonContent } from "@ionic/react";
+import { menuItems } from "./PageWithSearch";
 import { APPSTORE_URL, PLAYSTORE_URL, SASSYWARES_URL } from "@/config";
 
 type Props = PropsWithChildren<{ className?: string }>;
@@ -9,6 +10,22 @@ export function PageContent({ children, ...props }: Props) {
     <IonContent {...props} fullscreen>
       {children}
       <footer className="hidden lg:block mt-20 p-content bg-tertiary-shade">
+        {/* Nav Items */}
+        <ul className="flex p-content gap-content container">
+          {menuItems.map(({ label, href }) => (
+            <li key={label} className="text-sm">
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline focus:underline"
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        {/* End Nav Items */}
         <div className="container p-content flex items-center sm:flex-row flex-col text-tertiary-contrast">
           <h2 className="flex-shrink-0">Grape! 🍇</h2>
           <p className="text-lg sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0">
