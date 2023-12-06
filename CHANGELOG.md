@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/oikashan/grapes-pwa/compare/v0.0.4...v0.0.5) (2023-12-06)
+
+
+### Features
+
+* added footer nav ([197c671](https://github.com/oikashan/grapes-pwa/commit/197c6714ba1b30fb79145d226ec9901df7ccd3bf))
+* added sidebar menu ([52594e5](https://github.com/oikashan/grapes-pwa/commit/52594e50c6301154416911a1a848a70fbee96617))
+
+
+### Bug Fixes
+
+* added about URLs ([44a8a11](https://github.com/oikashan/grapes-pwa/commit/44a8a11af0509029c887ba6606939a7b064ddca3))
+
 ### [0.0.4](https://github.com/oikashan/grapes-pwa/compare/v0.0.3...v0.0.4) (2023-12-05)
 
 
