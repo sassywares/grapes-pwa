@@ -30,7 +30,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { APP_EMAIL, APP_NAME, ROADMAP_URL } from "@/config";
+import { ABOUT_URL, APP_EMAIL, APP_NAME, ROADMAP_URL } from "@/config";
 import { useMediaQuery } from "@/hooks";
 import { PageContent } from "./PageContent";
 import { ThemeSelect } from "./ThemeSelect";
@@ -46,13 +46,14 @@ export const menuItems = [
     mdIcon: informationCircleSharp,
     iosIcon: informationCircleOutline,
     label: "About us",
-    href: "",
+    href: ABOUT_URL,
   },
   {
     mdIcon: starSharp,
     iosIcon: starOutline,
     label: "Rate the app",
     href: "",
+    className: "hidden desktop:flex",
   },
   {
     mdIcon: bulbSharp,
@@ -98,10 +99,10 @@ export function PageWithSearch({ children }: Props) {
           </IonHeader>
           <IonContent>
             <IonList lines="full">
-              {menuItems.map(({ label, mdIcon, iosIcon, href }, i) => (
+              {menuItems.map(({ label, mdIcon, iosIcon, ...props }, i) => (
                 <IonItem
+                  {...props}
                   key={label}
-                  href={href}
                   target="_blank"
                   rel="noopener noreferrer"
                   lines={i === menuItems.length - 1 ? "none" : "full"}

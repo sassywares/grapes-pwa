@@ -12,8 +12,8 @@ export function PageContent({ children, ...props }: Props) {
       <footer className="hidden lg:block mt-20 p-content bg-tertiary-shade">
         {/* Nav Items */}
         <ul className="flex p-content gap-content container">
-          {menuItems.map(({ label, href }) => (
-            <li key={label} className="text-sm">
+          {menuItems.map(({ label, href, className = "" }) => (
+            <li key={label} className={`text-sm ${className}`}>
               <a
                 href={href}
                 target="_blank"

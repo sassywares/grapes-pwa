@@ -1,7 +1,9 @@
 import { Theme } from "./types";
 import { getPlatforms } from "@ionic/react";
 
-export const isIos = !getPlatforms().includes("android");
+const platforms = getPlatforms();
+export const isIos = !platforms.includes("android");
+export const isDesktop = platforms.includes("desktop");
 
 /**
  * console.log but only during development.
