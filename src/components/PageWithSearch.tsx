@@ -53,7 +53,7 @@ export const menuItems = [
     iosIcon: starOutline,
     label: "Rate the app",
     href: "",
-    className: "hidden desktop:flex",
+    className: "hidden",
   },
   {
     mdIcon: bulbSharp,

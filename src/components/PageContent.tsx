@@ -10,23 +10,43 @@ export function PageContent({ children, ...props }: Props) {
     <IonContent {...props} fullscreen>
       {children}
       <footer className="hidden lg:block mt-20 p-content bg-tertiary-shade">
-        {/* Nav Items */}
-        <ul className="flex p-content gap-content container">
-          {menuItems.map(({ label, href, className = "" }) => (
-            <li key={label} className={`text-sm ${className}`}>
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row items-center justify-between container">
+          {/* Copyright */}
+          <div className="flex items-center sm:flex-row flex-col">
+            <h2 className="flex-shrink-0">Grape! 🍇</h2>
+            <p className="text-lg sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0">
+              © {new Date().getFullYear()}{" "}
               <a
-                href={href}
                 target="_blank"
+                className="fancy"
+                href={SASSYWARES_URL}
                 rel="noopener noreferrer"
-                className="hover:underline focus:underline"
               >
-                {label}
+                Sassywares
               </a>
-            </li>
-          ))}
-        </ul>
+            </p>
+          </div>
+          {/* End Copyright */}
+          {/* Nav Items */}
+          <ul className="flex gap-content">
+            {menuItems.map(({ label, href, className = "" }) => (
+              <li key={label} className={`text-sm ${className}`}>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline focus:underline"
+                >
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* End Header */}
         {/* End Nav Items */}
-        <div className="container p-content flex items-center sm:flex-row flex-col text-tertiary-contrast">
+        <div className="container p-content flex items-center sm:flex-row flex-col text-tertiary-contrast !hidden">
           <h2 className="flex-shrink-0">Grape! 🍇</h2>
           <p className="text-lg sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0">
             © {new Date().getFullYear()}{" "}
@@ -39,6 +59,7 @@ export function PageContent({ children, ...props }: Props) {
               Sassywares
             </a>
           </p>
+          {/* Store URLs */}
           <span className="sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start hidden desktop:flex">
             <a
               target="_blank"
@@ -65,6 +86,7 @@ export function PageContent({ children, ...props }: Props) {
               />
             </a>
           </span>
+          {/* End Store URLs */}
         </div>
       </footer>
     </IonContent>
