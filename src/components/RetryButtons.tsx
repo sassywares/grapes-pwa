@@ -15,7 +15,7 @@ export function RetryButtons({ message }: { message: string }) {
         color="danger"
         target="_blank"
         rel="noreferrer"
-        href={`mailto://${APP_EMAIL}?subject=${subject}&body=${body}`}
+        href={`mailto:${APP_EMAIL}?subject=${subject}&body=${body}`}
       >
         Report
       </IonButton>

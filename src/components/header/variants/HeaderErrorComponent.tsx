@@ -19,7 +19,7 @@ export function HeaderErrorComponent() {
       rightSlot={
         <IonButtons slot="end">
           <IonButton
-            href={`mailto://${APP_EMAIL}?subject=${subject}&body=${body}`}
+            href={`mailto:${APP_EMAIL}?subject=${subject}&body=${body}`}
           >
             Report
           </IonButton>

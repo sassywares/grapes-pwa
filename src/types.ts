@@ -2,6 +2,8 @@
  * @file Type definitions
  */
 
+export type Theme = "light" | "dark" | "system";
+
 /**
  * An HTML string with tags and elements.
  */

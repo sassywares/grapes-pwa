@@ -168,7 +168,7 @@ ion-col {
     max-width: calc(33.333% - #{$size-md}) !important;
   }
 
-  @include when-md {
+  @include when-lg {
     width: calc(25% - #{$size-md}) !important;
     max-width: calc(25% - #{$size-md}) !important;
   }
@@ -283,6 +283,16 @@ ion-content.page-content {
   --padding-end: #{$size};
   --padding-bottom: #{$size};
   --padding-start: #{$size};
+}
+
+// Select
+ion-select {
+  min-height: auto;
+
+  &.select-theme::part(label),
+  &.select-theme::part(container) {
+    display: none;
+  }
 }
 
 // Utils

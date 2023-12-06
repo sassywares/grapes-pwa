@@ -32,7 +32,7 @@ import { IonApp, setupIonicReact, IonRouterOutlet } from "@ionic/react";
 import { HomePage } from "./pages/home";
 import { RecipePage } from "./pages/recipe";
 import { PageWithError } from "./components";
-import { isIos } from "./utils";
+import { getTheme, isIos, setTheme } from "./utils";
 
 const mode = new URLSearchParams(window.location.search).get("mode");
 
@@ -53,6 +53,9 @@ if (mode) {
     });
   }
 }
+
+// Set theme
+setTheme(getTheme());
 
 const App: React.FC = () => (
   <IonApp>
