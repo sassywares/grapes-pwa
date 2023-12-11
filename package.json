@@ -11,7 +11,9 @@
     "test.unit": "vitest",
     "test.e2e": "cypress run",
     "test": "npm run test.unit",
+    "test.ci": "cross-env CI=true npm run test",
     "build": "tsc && vite build",
+    "build.ci": "npm run test.ci && cross-env NODE_ENV=production npm run build",
     "release": "cross-env CI=true npm run test && cross-env NODE_ENV=production npm run build && npm run cap.sync && npx changeset version && git add . && npx standard-version --releaseCommitMessageFormat='[skip ci] %s'",
     "cap.sync": "ionic cap sync",
     "cap.assets": "npx capacitor-assets generate"
