@@ -1,5 +1,5 @@
 {
-  "name": "grapes-pwa",
+  "name": "@sassywares/grapes-pwa",
   "private": true,
   "version": "0.0.7",
   "type": "module",
@@ -14,7 +14,7 @@
     "test.ci": "cross-env CI=true npm run test",
     "build": "tsc && vite build",
     "build.ci": "npm run test.ci && cross-env NODE_ENV=production npm run build",
-    "release": "cross-env CI=true npm run test && cross-env NODE_ENV=production npm run build && npm run cap.sync && npx changeset version && git add . && npx standard-version --releaseCommitMessageFormat='[skip ci] %s'",
+    "release": "npm run build.ci && npm run cap.sync && npx changeset version && git add . && npx standard-version --releaseCommitMessageFormat='build: release prepared'",
     "cap.sync": "ionic cap sync",
     "cap.assets": "npx capacitor-assets generate"
   },
@@ -55,7 +55,7 @@
     "eslint": "^8.35.0",
     "eslint-plugin-react": "^7.32.2",
     "jsdom": "^22.1.0",
-    "postcss": "^8.4.31",
+    "postcss": "^8.4.32",
     "sass": "^1.69.5",
     "standard-version": "^9.5.0",
     "tailwindcss": "^3.3.5",
