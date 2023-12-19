@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://github.com/sassywares/workspace/compare/v0.0.7...v0.0.8) (2023-12-19)
+
+
+### Features
+
+* added readme ([8d25f34](https://github.com/sassywares/workspace/commit/8d25f34851092860a5e634b2c1d0f02117d61ccb))
+* added umami analytics ([c82ceba](https://github.com/sassywares/workspace/commit/c82ceba2117fa724cd60fb4b22941e22ae780bd2))
+
+
+### Bug Fixes
+
+* fixed actions deploy script ([de29f6f](https://github.com/sassywares/workspace/commit/de29f6fe7685fa166ea9f128638a0c60fad9090a))
+
 ### [0.0.7](https://github.com/oikashan/grapes-pwa/compare/v0.0.6...v0.0.7) (2023-12-06)
 
 
