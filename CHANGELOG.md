@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://github.com/sassywares/grapes-pwa/compare/v0.0.9...v0.0.10) (2023-12-20)
+
+
+### Features
+
+* added back button to privacy policy ([c1ae1ee](https://github.com/sassywares/grapes-pwa/commit/c1ae1ee960083de7fdd98dd3484758875ea02661))
+* added privacy policy ([0ed9136](https://github.com/sassywares/grapes-pwa/commit/0ed9136a62fe95c482ff260e1657263f0a09adfd))
+
 ### [0.0.9](https://github.com/sassywares/grapes-pwa/compare/v0.0.7...v0.0.9) (2023-12-19)
 
 
