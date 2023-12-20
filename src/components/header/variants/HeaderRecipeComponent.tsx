@@ -1,6 +1,5 @@
 import { log } from "@/utils";
 import { useState } from "react";
-import { routes } from "@/config";
 import { heart } from "ionicons/icons";
 import {
   Recipe,
@@ -10,8 +9,9 @@ import {
 } from "@/recipe";
 
 // Components
+import { BackButton } from "@/components/BackButton";
 import { HeaderComponent } from "../HeaderComponent";
-import { IonIcon, IonButton, IonButtons, IonBackButton } from "@ionic/react";
+import { IonIcon, IonButton, IonButtons } from "@ionic/react";
 
 export function HeaderRecipeComponent(recipe: Recipe) {
   const { recipeId } = recipe;
@@ -36,7 +36,7 @@ export function HeaderRecipeComponent(recipe: Recipe) {
       title="Recipe"
       leftSlot={
         <IonButtons slot="start">
-          <IonBackButton defaultHref={routes.home} />
+          <BackButton />
         </IonButtons>
       }
       rightSlot={

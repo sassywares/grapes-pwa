@@ -3,7 +3,6 @@ import { APP_EMAIL, APP_WEBSITE } from "@/config";
 export function PrivacyPolicy() {
   return (
     <>
-      <h1>Privacy Policy</h1>
       <p>Last updated: December 20, 2023</p>
       <p>
         This Privacy Policy describes Our policies and procedures on the
