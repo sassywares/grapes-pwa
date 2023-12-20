@@ -22,6 +22,7 @@ import "./theme/grapes/main.scss";
 
 // Utils
 import { routes } from "./config";
+import { getTheme, isIos, setTheme } from "./utils";
 
 // Components
 import { Route } from "react-router-dom";
@@ -32,7 +33,7 @@ import { IonApp, setupIonicReact, IonRouterOutlet } from "@ionic/react";
 import { HomePage } from "./pages/home";
 import { RecipePage } from "./pages/recipe";
 import { PageWithError } from "./components";
-import { getTheme, isIos, setTheme } from "./utils";
+import { PrivacyPolicyPage } from "./pages/privacy-policy";
 
 const mode = new URLSearchParams(window.location.search).get("mode");
 
@@ -66,6 +67,9 @@ const App: React.FC = () => (
         </Route>
         <Route exact path={routes.home}>
           <HomePage />
+        </Route>
+        <Route exact path={routes.privacyPolicy}>
+          <PrivacyPolicyPage />
         </Route>
         <Route>
           <PageWithError error={{ message: "Page Not Found" }} />

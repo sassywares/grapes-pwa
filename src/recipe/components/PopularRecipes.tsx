@@ -132,7 +132,7 @@ export function PopularRecipes() {
       <section id="popularRecipes" className="container">
         <IonGrid>
           <IonRow className="ion-padding-horizontal">
-            <IonText className="prose prose-h2:text-white">
+            <IonText className="prose dark:prose-invert">
               <h2>Snacks grape people love 🧡</h2>
             </IonText>
           </IonRow>
@@ -146,7 +146,7 @@ export function PopularRecipes() {
           id="popularRecipesFooter"
           className="container ion-padding w-full items-start justify-start pb-10"
         >
-          <IonText className="prose prose-h2:text-white">
+          <IonText className="prose dark:prose-invert">
             <h2>Not what you're looking for?</h2>
           </IonText>
           <IonButton color="tertiary" onClick={open}>

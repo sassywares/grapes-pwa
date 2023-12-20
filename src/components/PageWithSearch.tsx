@@ -1,19 +1,19 @@
-import { isIos } from "@/utils";
+import { isDesktop, isIos } from "@/utils";
 import { ModalProvider } from "./modal";
 import { ReactNode, useRef } from "react";
 import {
-  starOutline,
-  starSharp,
+  helpCircleOutline,
+  helpCircleSharp,
   informationCircleOutline,
   informationCircleSharp,
-  bulbOutline,
-  bulbSharp,
-  bugSharp,
-  bugOutline,
-  mapSharp,
+  mailOutline,
+  mailSharp,
   mapOutline,
-  helpCircleSharp,
-  helpCircleOutline,
+  mapSharp,
+  shieldOutline,
+  shieldSharp,
+  starOutline,
+  starSharp,
 } from "ionicons/icons";
 
 // Components
@@ -30,7 +30,13 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import { ABOUT_URL, APP_EMAIL, APP_NAME, ROADMAP_URL } from "@/config";
+import {
+  ABOUT_URL,
+  APP_EMAIL,
+  APP_NAME,
+  APP_WEBSITE,
+  ROADMAP_URL,
+} from "@/config";
 import { useMediaQuery } from "@/hooks";
 import { PageContent } from "./PageContent";
 import { ThemeSelect } from "./ThemeSelect";
@@ -56,16 +62,10 @@ export const menuItems = [
     className: "hidden",
   },
   {
-    mdIcon: bulbSharp,
-    iosIcon: bulbOutline,
-    label: "Feature Request",
-    href: `mailto:${APP_EMAIL}?subject=Feature%20Request&body=Please%20describe%20the%20feature%20below%3A%0A%0A%0A%0A%0A%0A%0A%0A%0A`,
-  },
-  {
-    mdIcon: bugSharp,
-    iosIcon: bugOutline,
-    label: "Report a bug",
-    href: `mailto:${APP_EMAIL}?subject=Bug%20Report&body=Please%20describe%20the%20bug%20below%3A%0A%0A%0A%0A%0A%0A%0A%0A%0A`,
+    mdIcon: mailSharp,
+    iosIcon: mailOutline,
+    label: "Contact us",
+    href: `mailto:${APP_EMAIL}`,
   },
   {
     mdIcon: mapSharp,
@@ -79,6 +79,12 @@ export const menuItems = [
     label: "Help",
     href: `mailto:${APP_EMAIL}?subject=Help%20Request&body=Please%20describe%20the%20help%20you%20need%20below%3A%0A%0A%0A%0A%0A%0A%0A%0A%0A`,
   },
+  {
+    mdIcon: shieldSharp,
+    iosIcon: shieldOutline,
+    label: "Privacy Policy",
+    href: `${APP_WEBSITE}/privacy-policy`,
+  },
 ];
 
 export function PageWithSearch({ children }: Props) {
@@ -87,6 +93,7 @@ export function PageWithSearch({ children }: Props) {
 
   return (
     <>
+      {/* Show left drawer only when above the lg breakpoint */}
       {isWithinLg && (
         <IonMenu contentId="main-content">
           <IonHeader>

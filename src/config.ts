@@ -2,6 +2,7 @@ import { Recipe } from "./recipe";
 
 export const APP_NAME = "Grape! 🍇";
 export const APP_EMAIL = "grape@sassywares.com";
+export const APP_WEBSITE = "https://grape.sassywares.com";
 
 // URLs
 export const SASSYWARES_URL = "https://sassywares.com?utm_source=grape";
@@ -26,4 +27,5 @@ export const routes = {
     pathname: `/recipe/${recipe.recipeId}${params ? `?${params}` : ""}`,
   }),
   notFound: "/not-found",
+  privacyPolicy: "/privacy-policy",
 };
